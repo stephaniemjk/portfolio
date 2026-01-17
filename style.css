@@ -14,7 +14,7 @@ body {
 }
 
 .card{
-  width: min(1100px, 92vw);
+  width: min(500, 92vw);
   padding: 48px 24px 64px;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@ body {
 
 .gallery-item img,
 .gallery-item video {
-  width: 100%;
+  width: 75%;
   border-radius: 12px;
   display: block;
   object-fit: cover;
