@@ -16,14 +16,14 @@ body {
 }
 
 .card img {
-  max-width: 300px;
+  max-width: 1000px;
   height: auto;
   display: block;
   margin: 0 auto 16px;
 }
 
 .card h1 {
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 400;
   letter-spacing: 0.05em;
 }
