@@ -1,29 +1,91 @@
-html, body {
+html,
+body {
   margin: 0;
-  height: 100%;
+min-height: 100%;
 }
 
 body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background: #f5f5f5;
-  font-family: system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1f1f1f;
 }
 
-.card {
-  text-align: center;
+.card{
+  width: min(1100px, 92vw);
+  padding: 48px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.card img {
-  max-width: 1000px;
-  height: auto;
+.intro h1 {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 500;
+  margin: 0 0 8px;
+  letter-spacing: 0.04em;
+}
+
+.intro p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.control-button {
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-button:hover,
+.control-button:focus {
+  border-color: #222;
+  color: #222;
+}
+
+.control-button.is-active {
+  background: #1f1f1f;
+  color: #fff;
+  border-color: #1f1f1f;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(31, 31, 31, 0.08);
+  display: grid;
+  gap: 12px;
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  border-radius: 12px;
   display: block;
-  margin: 0 auto 16px;
+  object-fit: cover;
 }
 
-.card h1 {
-  font-size: 40px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
+.gallery-item figcaption {
+  font-size: 14px;
+  color: #444;
 }
