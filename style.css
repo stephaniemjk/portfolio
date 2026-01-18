@@ -107,6 +107,24 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.welcome-tile {
+  text-align: center;
+  min-height: 220px;
+  justify-content: center;
+}
+
+.welcome-tile .tile-text {
+  padding: 28px 24px 30px;
+}
+
+.welcome-tile h2 {
+  font-size: 22px;
+}
+
+.welcome-tile p {
+  font-size: 15px;
+}
+
 .tile:hover,
 .tile:focus,
 .gallery-tile:hover,
