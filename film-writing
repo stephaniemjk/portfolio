@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Film Writing | Stephanie Kim</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <div>
+          <h1>Stephanie Kim</h1>
+          <p class="subtitle">Film writing gallery.</p>
+        </div>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Welcome</a>
+          <a href="designs.html">Designs</a>
+          <a href="animations.html">Animations</a>
+          <a class="is-active" href="film-writing.html">Film Writing</a>
+        </nav>
+      </header>
+
+      <section class="gallery-grid" aria-label="Film writing projects">
+        <a class="gallery-tile" href="film-writing.html#short-film" id="short-film">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Short film treatment" />
+          </div>
+          <div class="tile-text">
+            <h2>Short Film Treatment</h2>
+            <p>Logline and structure outline.</p>
+          </div>
+        </a>
+        <a class="gallery-tile" href="film-writing.html#script-scene" id="script-scene">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Script scene" />
+          </div>
+          <div class="tile-text">
+            <h2>Script Scene</h2>
+            <p>Dialogue excerpt with scene notes.</p>
+          </div>
+        </a>
+        <a class="gallery-tile" href="film-writing.html#pitch-deck" id="pitch-deck">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Pitch deck" />
+          </div>
+          <div class="tile-text">
+            <h2>Pitch Deck</h2>
+            <p>Visual beats and narrative highlights.</p>
+          </div>
+        </a>
+        <a class="gallery-tile" href="film-writing.html#character-study" id="character-study">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Character study" />
+          </div>
+          <div class="tile-text">
+            <h2>Character Study</h2>
+            <p>Profiles, motivations, and arcs.</p>
+          </div>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
