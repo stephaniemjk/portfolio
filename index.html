@@ -6,111 +6,46 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-<main class="card">
-      <header class="intro">
-        <h1>Stephanie Kim</h1>
-        <p>Visual diary featuring photo moments and short mp4 clips.</p>
+    <main class="page">
+      <header class="site-header">
+        <div>
+          <p class="eyebrow">Welcome</p>
+          <h1>Stephanie Kim</h1>
+          <p class="subtitle">
+            Visual storyteller across design, animation, and film writing.
+          </p>
+        </div>
       </header>
-      <div class="controls" role="group" aria-label="Gallery filters">
-        <button class="control-button is-active" type="button" data-filter="all">All</button>
-        <button class="control-button" type="button" data-filter="photo">Photos</button>
-        <button class="control-button" type="button" data-filter="video">Videos</button>
-      </div>
-      <section class="gallery" aria-live="polite">
-        <figure class="gallery-item" data-type="photo">
-          <img src="assets/photo.jpg" alt="Stephanie in warm afternoon light" />
-          <figcaption>Afternoon portrait</figcaption>
-        </figure>
-        <figure class="gallery-item" data-type="photo">
-          <img src="assets/photo.jpg" alt="Studio profile shot" />
-          <figcaption>Studio profile</figcaption>
-        </figure>
-        <figure class="gallery-item" data-type="video">
-          <video controls preload="metadata" poster="assets/photo.jpg">
-            <source
-              src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          <figcaption>Garden walk (mp4)</figcaption>
-        </figure>
-        <figure class="gallery-item" data-type="video">
-          <video controls preload="metadata" poster="assets/photo.jpg">
-            <source
-              src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          <figcaption>Evening bloom (mp4)</figcaption>
-        </figure>
+
+      <section class="tile-grid" aria-label="Portfolio sections">
+        <a class="tile" href="designs.html">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Design gallery preview" />
+          </div>
+          <div class="tile-text">
+            <h2>Designs</h2>
+            <p>Selected visuals, experiments, and concept work.</p>
+          </div>
+        </a>
+        <a class="tile" href="animations.html">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Animation gallery preview" />
+          </div>
+          <div class="tile-text">
+            <h2>Animations</h2>
+            <p>Short-form motion tests and story beats.</p>
+          </div>
+        </a>
+        <a class="tile" href="film-writing.html">
+          <div class="tile-media">
+            <img src="assets/photo.jpg" alt="Film writing gallery preview" />
+          </div>
+          <div class="tile-text">
+            <h2>Film Writing</h2>
+            <p>Scenes, treatments, and narrative explorations.</p>
+          </div>
+        </a>
       </section>
     </main>
-    <script>
-      const buttons = document.querySelectorAll('.control-button');
-      const items = document.querySelectorAll('.gallery-item');
-
-      buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const filter = button.dataset.filter;
-
-          buttons.forEach((btn) => btn.classList.remove('is-active'));
-          button.classList.add('is-active');
-
-          items.forEach((item) => {
-            const matches = filter === 'all' || item.dataset.type === filter;
-            item.hidden = !matches;
-          });
-        });
-      });
-    </script>
-<div class="controls" role="group" aria-label="Gallery filters">
-  <div class="filter-buttons">
-    <button class="control-button is-active" type="button" data-filter="all">All</button>
-    <button class="control-button" type="button" data-filter="photo">Photos</button>
-    <button class="control-button" type="button" data-filter="video">Videos</button>
-  </div>
-  <div class="nav-buttons" aria-label="Gallery navigation">
-    <button class="nav-button" type="button" data-scroll="prev" aria-label="Scroll gallery left">
-      <img src="assets/left.png" alt="Scroll left" />
-    </button>
-    <button class="nav-button" type="button" data-scroll="next" aria-label="Scroll gallery right">
-      <img src="assets/right.png" alt="Scroll right" />
-    </button>
-  </div>
-</div>
-<section class="gallery-shell">
-  <div class="gallery" aria-live="polite">
-    <figure class="gallery-item" data-type="photo">
-      <img src="assets/photo.jpg" alt="Stephanie in warm afternoon light" />
-      <figcaption>Afternoon portrait</figcaption>
-    </figure>
-    <figure class="gallery-item" data-type="photo">
-      <img src="assets/photo.jpg" alt="Studio profile shot" />
-      <figcaption>Studio profile</figcaption>
-    </figure>
-    <figure class="gallery-item" data-type="video">
-      <video controls preload="metadata" poster="assets/photo.jpg">
-        <source
-          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-      <figcaption>Garden walk (mp4)</figcaption>
-    </figure>
-    <figure class="gallery-item" data-type="video">
-      <video controls preload="metadata" poster="assets/photo.jpg">
-        <source
-          src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-      <figcaption>Evening bloom (mp4)</figcaption>
-    </figure>
-  </div>
-</section>
   </body>
-</html>  
+</html>
