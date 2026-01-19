@@ -185,4 +185,19 @@ body {
   .tile-media img {
     height: 200px;
   }
+.detail-card {
+  padding: 32px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.detail-card h2 {
+  margin-top: 0;
+}
+
+.detail-link {
+  display: inline-block;
+  margin-top: 24px;
+}
 }
