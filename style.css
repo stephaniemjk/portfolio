@@ -23,17 +23,44 @@ body {
     gap: 32px;
 }
 
-.subtitle {
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+}
+
+.nav-bar a{
+    text-decoration: none;
+    color: #000000;
+    padding: 36px;
+    background: #d9d9d9;
+    font-size: 32px;
+    transition: all 0.2s ease;
+}
+
+.nav-bar a:hover,
+.nav-bar a:focus{
+    border-color: #000000;
+}
+
+.nav-bar a.is-active{
+    background: #000000;
+    color: #fff;
+}
+
+
+.about {
     margin: 0;
     font-size: 20px;
     color: #000000;
     width: 563px;
-}
-
-.tile-grid{ 
-    display: grid;
-    gap: 36px;
-    grid-template-columns: repeat(auto-fit, minmax(272px, 1 fr));
-    font-size: 32px;
 }
 
