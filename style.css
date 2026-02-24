@@ -1,8 +1,8 @@
-: root {
+:root {
     color-scheme: light;
     font-family: "Inter", system-ui, sans-serif;
-    color: #000000;
-    background: #ffffff;
+    color: #000;
+    background: #fff;
 }
 
 * {
@@ -42,16 +42,17 @@ body {
 .nav-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 36px;
+    gap: 12px;
     align-items: center;
 }
 
 .nav-bar a{
     text-decoration: none;
     color: #000000;
-    padding: 36px;
+    padding: 10px 20px;
     background: #d9d9d9;
-    font-size: 32px;
+    border: 1px solid transparent;
+    font-size: clamp(16px, 2.2vw, 24px);
     transition: all 0.2s ease;
 }
 
@@ -66,15 +67,15 @@ body {
 }
 
 .about {
-    margin: 0;
+    flex: 1 1 360px; 
     font-size: 20px;
-    align-items: right;
     color: #000000;
-    width: 563px;
+    max-width: 640px;
+    line-height: 1.5;
 }
 
-.aboutimage{
-    width: 300px;
-    color: #d9d9d9
-    align-items:left; 
+.aboutimage img{
+    width: 100%;
+    height: auto;
+    display: block;
 }
