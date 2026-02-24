@@ -66,16 +66,40 @@ body {
     color: #fff;
 }
 
+.about-wrap {
+    display:grid;
+    grid-template-columns: minmax (320px, 1fr) minmax(220px, 320px);
+    align-items:start
+    gap: 32px;
+}
 .about {
-    flex: 1 1 360px; 
     font-size: 20px;
     color: #000000;
-    max-width: 640px;
     line-height: 1.5;
+}
+
+.about p{
+    margin-top: 0;
+}
+
+.aboutimage {
+    width: 100%;
+    max-width: 320px;
+    justify-self: end;
 }
 
 .aboutimage img{
     width: 100%;
     height: auto;
     display: block;
+}
+
+@media (max-width: 900px){
+    .about-wrap{
+        grid-template-columns: 1fr;
+    }
+
+    .aboutimage{
+        justify-self: start;
+    }
 }
