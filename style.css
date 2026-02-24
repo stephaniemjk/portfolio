@@ -31,10 +31,19 @@ body {
     gap: 24px;
 }
 
+.site-header h1{
+    margin: 0 0 6px;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: 0.02em;
+}
+
 .nav-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 36px;
+    align-items: center;
 }
 
 .nav-bar a{
@@ -56,11 +65,16 @@ body {
     color: #fff;
 }
 
-
 .about {
     margin: 0;
     font-size: 20px;
+    align-items: right;
     color: #000000;
     width: 563px;
 }
 
+.aboutimage{
+    width: 300px;
+    color: #d9d9d9
+    align-items:left; 
+}
