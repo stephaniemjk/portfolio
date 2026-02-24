@@ -1,80 +1,96 @@
-: root {
-    color-scheme: light;
-    font-family: "Inter", system-ui, sans-serif;
-    color: #000000;
-    background: #ffffff;
+:root {
+  color-scheme: light;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #000;
+  background: #fff;
 }
 
 * {
-    box-sizing: border-box;    
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
 }
 
 .page {
-    width: min(1280px, 92vw);
-    margin: 0 auto;
-    padding: 48px 0 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  padding: 48px 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .site-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
 }
 
-.site-header h1{
-    margin: 0 0 6px;
-    font-size: clamp(32px, 4vw, 44px);
-    font-weight: 600;
-    color: #000000;
-    letter-spacing: 0.02em;
+.site-header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 600;
+  color: #000;
+  letter-spacing: 0.02em;
 }
 
 .nav-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 36px;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
 }
 
-.nav-bar a{
-    text-decoration: none;
-    color: #000000;
-    padding: 36px;
-    background: #d9d9d9;
-    font-size: 32px;
-    transition: all 0.2s ease;
+.nav-bar a {
+  text-decoration: none;
+  color: #000;
+  padding: 10px 20px;
+  background: #d9d9d9;
+  border: 1px solid transparent;
+  font-size: clamp(16px, 2.2vw, 24px);
+  transition: all 0.2s ease;
 }
 
 .nav-bar a:hover,
-.nav-bar a:focus{
-    border-color: #000000;
+.nav-bar a:focus-visible {
+  border-color: #000;
 }
 
-.nav-bar a.is-active{
-    background: #000000;
-    color: #fff;
+.nav-bar a.is-active {
+  background: #000;
+  color: #fff;
+}
+
+.about-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 32px;
 }
 
 .about {
-    margin: 0;
-    font-size: 20px;
-    align-items: right;
-    color: #000000;
-    width: 563px;
+  flex: 1 1 360px;
+  font-size: 20px;
+  color: #000;
+  max-width: 640px;
+  line-height: 1.5;
 }
 
-.aboutimage{
-    width: 300px;
-    color: #d9d9d9
-    align-items:left; 
+.about p {
+  margin-top: 0;
+}
+
+.aboutimage {
+  flex: 0 1 320px;
+}
+
+.aboutimage img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
