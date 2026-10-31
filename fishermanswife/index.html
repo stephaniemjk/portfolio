@@ -48,27 +48,37 @@
       <img class="loader-hand boil-hand" src="img/loading/hand.webp" width="1000" height="855" alt="Hands holding a spatula and a pot with a fish inside">
       <img class="loader-recipe" src="img/loading/recipe.webp" width="1050" height="840" alt="Ingredients: 1 enduring sage, 2 flourishing dandelions, 3 growing leek leaves, 4 overwhelming jars of water, 5 rotting garlic cloves, 6 dwindling spoons of salt, 7 whimpering fishes">
     </div>
-    <button class="loader-go" id="loader-go" type="button" aria-label="Enter the story" disabled>
-      <img src="img/loading/continue.webp" width="600" height="120" alt="">
+    <button class="loader-go" id="loader-go" type="button" aria-label="Start the story" disabled>
+      <img src="img/buttons/loading-start.webp" width="550" height="155" alt="">
     </button>
   </div>
 </div>
 
 <main id="story" tabindex="-1">
 
-  <header class="opening">
+  <header class="opening step-section" id="s-logo">
     <h1 class="sr-only">Fisherman's Wife</h1>
     <img class="logo boil-logo" src="img/logo.webp" width="1200" height="400" alt="Fisherman's Wife" fetchpriority="high">
+    <nav class="steps" data-from="s-logo" aria-label="Story navigation"><a class="step" href="#s-alert" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
   </header>
 
-  <div class="pot" id="pot">
+  <!-- Phones and tablets only -->
+  <div class="touch-only">
+    <section class="alert step-section" id="s-alert">
+      <img src="img/buttons/alert-mobile.webp" width="640" height="841" alt="Mobile users: please turn off Low Power Mode, or the videos will not load." loading="lazy">
+    </section>
+    <nav class="steps" data-from="s-alert" aria-label="Story navigation"><a class="step" href="#s-logo" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-pot" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
+  </div>
+
+  <div class="pot step-section" id="s-pot">
     <video class="pot-media" id="pot-video" muted loop playsinline preload="auto" aria-label="A red pot whose lid flies off as fish and steam rise and the byline By Stephanie M Kim appears">
       <source src="video/pot.webm" type="video/webm">
     </video>
   </div>
+  <nav class="steps" data-from="s-pot" aria-label="Story navigation"><a class="step" href="#s-alert" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene1" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene one -->
-  <div class="title-card boil-c">
+  <div class="title-card boil-c step-section" id="s-scene1">
     <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
     <h2><img src="img/titles/scene-title-1.webp" width="1360" height="320" alt="Scene one" loading="lazy"></h2>
   </div>
@@ -83,9 +93,10 @@
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true">
     </div>
   </figure>
+  <nav class="steps" data-from="s-scene1" aria-label="Story navigation"><a class="step" href="#s-pot" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene2" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene two -->
-  <div class="title-card boil-d">
+  <div class="title-card boil-d step-section" id="s-scene2">
     <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
     <h2><img src="img/titles/scene-title-2.webp" width="1360" height="320" alt="Scene two" loading="lazy"></h2>
   </div>
@@ -100,9 +111,10 @@
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
+  <nav class="steps" data-from="s-scene2" aria-label="Story navigation"><a class="step" href="#s-scene1" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene3" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene three -->
-  <div class="title-card boil-a">
+  <div class="title-card boil-a step-section" id="s-scene3">
     <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
     <h2><img src="img/titles/scene-title-3.webp" width="1360" height="320" alt="Scene three" loading="lazy"></h2>
   </div>
@@ -117,9 +129,10 @@
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
+  <nav class="steps" data-from="s-scene3" aria-label="Story navigation"><a class="step" href="#s-scene2" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene4" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene four: plays once and holds on La Fin -->
-  <div class="title-card boil-b">
+  <div class="title-card boil-b step-section" id="s-scene4">
     <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
     <h2><img src="img/titles/scene-title-4.webp" width="1360" height="320" alt="Scene four" loading="lazy"></h2>
   </div>
@@ -135,6 +148,7 @@
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
+  <nav class="steps" data-from="s-scene4" aria-label="Story navigation"><a class="step" href="#s-scene3" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step step-begin" href="#s-logo" data-step="begin"><img src="img/buttons/scroll-beginning.webp" width="550" height="168" alt="Start from the beginning"></a></nav>
 
 </main>
 

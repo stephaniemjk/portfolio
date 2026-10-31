@@ -106,9 +106,9 @@ img, video { display: block; max-width: 100%; }
   .loader-inner { gap: 12px; }
   .loader-title { width: min(340px, 100%); }
   .loader-row { max-width: 100%; gap: 12px; }
-  .loader-hand { width: min(240px, 62vw); }
-  .loader-recipe { width: min(300px, 78vw); }
-  .loader-go { width: min(200px, 56vw); }
+  .loader-hand { width: min(204px, 53vw); }
+  .loader-recipe { width: min(255px, 66vw); }
+  .loader-go { width: min(190px, 52vw); }
 }
 
 /* Story */
@@ -123,8 +123,29 @@ main {
   min-height: 100vh; min-height: 100svh;
   margin-top: -96px;
   display: flex; align-items: center; justify-content: center;
+  position: relative;
 }
 .logo { width: 1040px; height: auto; }
+
+/* Continue / go back / start over */
+html { scroll-behavior: smooth; }
+.step-section { scroll-margin-top: 24px; }
+.steps {
+  width: 100%; max-width: 838px; margin-top: -40px;
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(40px, 10vw, 120px);
+}
+.step { display: block; border-radius: 8px; }
+.step img { display: block; width: 150px; height: auto; }
+.step-begin img { width: 240px; }
+.step:hover img { transform: translateY(-2px); }
+.step img { transition: transform .2s ease; }
+.step:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+.opening .steps { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: clamp(24px, 6vh, 64px); }
+
+.touch-only { display: contents; }
+@media not all and (pointer: coarse) { .touch-only { display: none; } }
+.alert img { width: min(320px, 78vw); height: auto; }
 
 .pot { width: 512px; max-width: 100%; transform: translateX(-6.1%); margin-bottom: 32px; }
 .pot-media { width: 100%; height: auto; aspect-ratio: 1430 / 1218; }
@@ -172,6 +193,8 @@ html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .
 html.js .reveal.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal { transform: none; transition: opacity .4s ease; }
+  html { scroll-behavior: auto; }
+  .step img { transition: none; }
   .loader, .loader-go { transition: none; }
 }
 
@@ -182,4 +205,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .narration { padding: 0 8px; }
   .pot { margin-bottom: 40px; }
   .tap-play { width: 56px; height: 56px; }
+  .steps { margin-top: -16px; }
+  .step img { width: 120px; }
+  .step-begin img { width: 200px; }
 }
