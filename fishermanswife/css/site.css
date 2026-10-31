@@ -1,0 +1,173 @@
+/* Fisherman's Wife */
+
+:root {
+  --paper: #F6F6D5;
+  --ink: #0D1149;
+  --b: 47px;                       /* border thickness */
+  --b-lead: calc(var(--b) * 2.3567);
+  --b-unit: calc(var(--b) * 3.3566);
+}
+@media (max-width: 600px) { :root { --b: 30px; } }
+
+* { box-sizing: border-box; }
+html { background: var(--paper); -webkit-text-size-adjust: 100%; }
+html.is-loading { overflow: hidden; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-variation-settings: 'SOFT' 100;
+}
+img, video { display: block; max-width: 100%; }
+.filters { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Boil */
+.boil-a { filter: url(#boil-a); }
+.boil-b { filter: url(#boil-b); }
+.boil-c { filter: url(#boil-c); }
+.boil-d { filter: url(#boil-d); }
+.boil-logo { filter: url(#boil-logo); }
+.boil-hand { filter: url(#boil-hand); }
+@media (prefers-reduced-motion: reduce) {
+  .boil-a, .boil-b, .boil-c, .boil-d, .boil-logo, .boil-hand { filter: none; }
+}
+
+/* Star and swirl border, built from corner and edge pieces */
+.frame { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.frame i { position: absolute; display: block; }
+.frame .tl, .frame .tr, .frame .bl, .frame .br {
+  width: var(--b); height: var(--b);
+  background: url(../img/border/corner.webp) center / contain no-repeat;
+}
+.frame .tl { top: 0; left: 0; } .frame .tr { top: 0; right: 0; }
+.frame .bl { bottom: 0; left: 0; } .frame .br { bottom: 0; right: 0; }
+.frame .t, .frame .b {
+  left: var(--b); right: var(--b); height: var(--b); padding-left: var(--b-lead);
+  background-image: url(../img/border/edge-h-lead.webp), url(../img/border/edge-h.webp);
+  background-repeat: no-repeat, round no-repeat;
+  background-size: var(--b-lead) var(--b), var(--b-unit) var(--b);
+  background-position: left top, left top;
+  background-origin: padding-box, content-box;
+  background-clip: padding-box, content-box;
+}
+.frame .t { top: 0; } .frame .b { bottom: 0; }
+.frame .l, .frame .r {
+  top: var(--b); bottom: var(--b); width: var(--b); padding-top: var(--b-lead);
+  background-image: url(../img/border/edge-v-lead.webp), url(../img/border/edge-v.webp);
+  background-repeat: no-repeat, no-repeat round;
+  background-size: var(--b) var(--b-lead), var(--b) var(--b-unit);
+  background-position: left top, left top;
+  background-origin: padding-box, content-box;
+  background-clip: padding-box, content-box;
+}
+.frame .l { left: 0; } .frame .r { right: 0; }
+
+/* Loading screen */
+.loader {
+  position: fixed; inset: 0; z-index: 1000;
+  background: var(--paper);
+  transition: opacity .8s ease;
+}
+.loader.is-leaving { opacity: 0; pointer-events: none; }
+.loader-inner {
+  position: absolute; inset: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; justify-content: safe center;
+  gap: 16px;
+  padding: calc(var(--b) + 16px) calc(var(--b) + 12px);
+}
+.loader-title { margin: 0; width: min(560px, 86%, 70vh); flex: none; }
+.loader-title img { width: 100%; height: auto; }
+.loader-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 24px 56px; max-width: 86%; flex: none;
+}
+.loader-hand { width: min(380px, 47vh); height: auto; }
+.loader-recipe { width: min(394px, 49vh); height: auto; }
+.loader-go {
+  flex: none;
+  width: min(260px, 60%, 32vh);
+  padding: 8px 0; margin: 0;
+  background: none; border: 0; border-radius: 8px;
+  cursor: pointer;
+  opacity: 0; transition: opacity .6s ease;
+}
+.loader-go img { width: 100%; height: auto; }
+.loader-go.is-ready { opacity: 1; }
+.loader-go:disabled { cursor: default; }
+.loader-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+@media (max-width: 600px) {
+  .loader-inner { gap: 12px; }
+  .loader-title { width: min(340px, 100%); }
+  .loader-row { max-width: 100%; gap: 12px; }
+  .loader-hand { width: min(240px, 62vw); }
+  .loader-recipe { width: min(300px, 78vw); }
+  .loader-go { width: min(200px, 56vw); }
+}
+
+/* Story */
+main {
+  min-height: 100vh;
+  padding: 96px clamp(48px, 7vw, 80px) 160px;
+  display: flex; flex-direction: column; align-items: center; gap: 96px;
+  outline: none;
+}
+.opening {
+  width: 100%; max-width: 1120px;
+  min-height: 100vh; min-height: 100svh;
+  margin-top: -96px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo { width: 1040px; height: auto; }
+
+.pot { width: 512px; max-width: 100%; transform: translateX(-6.1%); }
+.pot-media { width: 100%; height: auto; aspect-ratio: 1430 / 1218; }
+
+.title-card {
+  position: relative;
+  width: 837px; max-width: 100%; height: 363px;
+  padding: 0 96px; margin-bottom: -48px;
+  display: flex; align-items: center; justify-content: center;
+}
+.title-card h2 { margin: 0; width: 560px; max-width: 100%; }
+.title-card h2 img { width: 100%; height: auto; }
+
+.narration { width: 100%; max-width: 838px; }
+.narration p {
+  margin: 0 0 1em;
+  font-size: clamp(17px, 1.75vw, 22px);
+  line-height: 1.6;
+}
+.narration p:last-child { margin-bottom: 0; }
+.narration p::after { content: ""; display: block; clear: left; }
+.narration b { font-weight: 700; }
+.cap { float: left; width: 4.45em; height: 4.45em; margin: 0.24em 0.45em 0 0; }
+
+.scene { margin: 0; width: 100%; max-width: 1040px; }
+.scene-box { position: relative; width: 100%; aspect-ratio: 2400 / 1560; }
+.scene-video {
+  position: absolute; left: 9.7917%; top: 14.5513%; width: 80.625%; height: 69.8077%;
+  object-fit: cover;
+}
+.scene-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* Narration fades in on scroll (only when JS runs) */
+html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s ease; }
+html.js .reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { transform: none; transition: opacity .4s ease; }
+  .loader, .loader-go { transition: none; }
+}
+
+@media (max-width: 600px) {
+  main { padding: 72px 12px 120px; gap: 56px; }
+  .opening { margin-top: -72px; }
+  .title-card { width: 100%; height: 232px; padding: 0 44px; margin-bottom: -28px; }
+  .narration { padding: 0 8px; }
+}

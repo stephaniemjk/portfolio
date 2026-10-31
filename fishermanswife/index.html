@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+<head>
+<meta charset="utf-8">
+<script>
+  // Relative asset paths need a trailing slash: /fishermanswife -> /fishermanswife/
+  if (location.pathname !== '/' && !/\/$|\.html$/.test(location.pathname)) {
+    location.replace(location.pathname + '/' + location.search + location.hash);
+  }
+  document.documentElement.classList.add('js');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fisherman's Wife</title>
+<meta name="description" content="Fisherman's Wife, an animated folk tale by Stephanie M Kim.">
+<meta name="theme-color" content="#F6F6D5">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fisherman's Wife">
+<meta property="og:description" content="An animated folk tale by Stephanie M Kim.">
+<meta property="og:url" content="https://stephaniemkim.com/fishermanswife/">
+<meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&amp;display=swap">
+<link rel="preload" as="image" href="img/loading/piscine-stew.webp">
+<link rel="preload" as="image" href="img/loading/hand.webp">
+<link rel="preload" as="image" href="img/loading/recipe.webp">
+<link rel="stylesheet" href="css/site.css">
+<noscript><style>.loader{display:none!important}html.is-loading{overflow:auto!important}</style></noscript>
+</head>
+<body>
+
+<!-- Boil filters: seeds are stepped by js/site.js (8 per second, staggered) -->
+<svg class="filters" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="boil-a" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="3" data-seeds="3 41 77"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil-b" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="12" data-seeds="12 58 94"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil-c" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="27" data-seeds="27 63 15"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil-d" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="2" seed="48" data-seeds="48 86 31"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil-logo" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="5" data-seeds="5 44 83"/><feDisplacementMap in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="boil-hand" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="12" data-seeds="12 58 94"/><feDisplacementMap in="SourceGraphic" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+
+<!-- Loading screen: covers the page until the logo, pot and first scene are ready -->
+<div class="loader" id="loader" role="dialog" aria-modal="true" aria-labelledby="loader-title">
+  <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+  <div class="loader-inner">
+    <p class="loader-title" id="loader-title"><img class="boil-a" src="img/loading/piscine-stew.webp" width="1100" height="300" alt="How to make Piscine Stew?"></p>
+    <div class="loader-row">
+      <img class="loader-hand boil-hand" src="img/loading/hand.webp" width="1000" height="855" alt="Hands holding a spatula and a pot with a fish inside">
+      <img class="loader-recipe" src="img/loading/recipe.webp" width="1050" height="840" alt="Ingredients: 1 enduring sage, 2 flourishing dandelions, 3 growing leek leaves, 4 overwhelming jars of water, 5 rotting garlic cloves, 6 dwindling spoons of salt, 7 whimpering fishes">
+    </div>
+    <button class="loader-go" id="loader-go" type="button" aria-label="Enter the story" disabled>
+      <img src="img/loading/continue.webp" width="600" height="120" alt="">
+    </button>
+  </div>
+</div>
+
+<main id="story" tabindex="-1">
+
+  <header class="opening">
+    <h1 class="sr-only">Fisherman's Wife</h1>
+    <img class="logo boil-logo" src="img/logo.webp" width="1200" height="400" alt="Fisherman's Wife" fetchpriority="high">
+  </header>
+
+  <div class="pot" id="pot">
+    <video class="pot-media" id="pot-video" muted loop playsinline preload="auto" aria-label="A red pot whose lid flies off as fish and steam rise and the byline By Stephanie M Kim appears">
+      <source src="video/pot.webm" type="video/webm">
+    </video>
+  </div>
+
+  <!-- Scene one -->
+  <div class="title-card boil-c">
+    <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+    <h2><img src="img/titles/scene-title-1.webp" width="1360" height="320" alt="Scene one" loading="lazy"></h2>
+  </div>
+  <section class="narration reveal" aria-label="Scene one">
+    <p><img class="cap" src="img/caps/cap-1.webp" width="480" height="480" alt="T">he fisherman’s wife eagerly chopped away at the vegetables, in anticipation of the special dinner. She was preparing piscine stew, a recipe handed down by her great-grandmother, to her grandmother, to her aunt, to her mother, and at last, to her.</p>
+    <p>The final ingredient would be delivered by her partner: <b>seven whimpering fishes</b>.</p>
+  </section>
+  <figure class="scene">
+    <div class="scene-box">
+      <video class="scene-video" data-mode="loop" src="video/scene-01.mp4" muted loop playsinline preload="auto" aria-label="The fisherman's wife chops vegetables in her kitchen"></video>
+      <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true">
+    </div>
+  </figure>
+
+  <!-- Scene two -->
+  <div class="title-card boil-d">
+    <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+    <h2><img src="img/titles/scene-title-2.webp" width="1360" height="320" alt="Scene two" loading="lazy"></h2>
+  </div>
+  <section class="narration reveal" aria-label="Scene two">
+    <p><img class="cap" src="img/caps/cap-2.webp" width="480" height="480" alt="O" loading="lazy">nce the boats returned to harbor, and the heels of the fishermen’s boots banged against the wooden dock, the kitchen door flung open.<br>The fisherman’s wife turned to greet her husband.</p>
+    <p>After a long day, all the fisherman could collect was <b>one measly fish</b>.</p>
+  </section>
+  <figure class="scene">
+    <div class="scene-box">
+      <video class="scene-video" data-mode="loop" src="video/scene-02.mp4" muted loop playsinline preload="metadata" aria-label="The fisherman comes home holding up one small fish"></video>
+      <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </figure>
+
+  <!-- Scene three -->
+  <div class="title-card boil-a">
+    <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+    <h2><img src="img/titles/scene-title-3.webp" width="1360" height="320" alt="Scene three" loading="lazy"></h2>
+  </div>
+  <section class="narration reveal" aria-label="Scene three">
+    <p><img class="cap" src="img/caps/cap-3.webp" width="480" height="480" alt="A" loading="lazy">stounded, she fled. The fisherman searched the village until his stomach began to growl. He drove down the unlit road. Every restaurant had closed at sunset.</p>
+    <p>At the end of the expressway, one storefront lit up for <b>vegetarian burgers</b>.</p>
+  </section>
+  <figure class="scene">
+    <div class="scene-box">
+      <video class="scene-video" data-mode="loop" src="video/scene-03.mp4" muted loop playsinline preload="metadata" aria-label="The fisherman drives up to a lit roadside burger stand at night"></video>
+      <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </figure>
+
+  <!-- Scene four: plays once and holds on La Fin -->
+  <div class="title-card boil-b">
+    <div class="frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+    <h2><img src="img/titles/scene-title-4.webp" width="1360" height="320" alt="Scene four" loading="lazy"></h2>
+  </div>
+  <section class="narration reveal" aria-label="Scene four">
+    <p><img class="cap" src="img/caps/cap-4.webp" width="480" height="480" alt="T" loading="lazy">he burger’s panache finally satiated the fisherman’s hunger. Lucid again, he drove on. The expressway thinned until the gravel gave way to sand, the white lines of the road dissolving into fluid beige.</p>
+    <p>The fisherman was determined to return to the cottage with his long-lost wife.</p>
+    <p>At least he had the companionship of <b>his fish and its fries</b>.</p>
+  </section>
+  <figure class="scene">
+    <div class="scene-box">
+      <video class="scene-video" data-mode="once" src="video/scene-04.mp4" muted playsinline preload="metadata" aria-label="The fisherman drives through the desert with his fish and fries, ending on La Fin"></video>
+      <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </figure>
+
+</main>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>
