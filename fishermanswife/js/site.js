@@ -128,10 +128,26 @@
     });
   }
   Array.prototype.forEach.call(document.querySelectorAll('.scene-video'), function (v) {
+    var box = v.parentNode;
     var b = tapButton(v);
-    if (!b) return;
-    b.addEventListener('click', function () { b.hidden = true; play(v); });
-    v.addEventListener('playing', function () { b.hidden = true; });
+    var r = box.querySelector('.replay');
+    if (b) {
+      b.addEventListener('click', function () { b.hidden = true; play(v); });
+      v.addEventListener('playing', function () { b.hidden = true; });
+    }
+    // Each scene plays once. When it ends the picture dims (scene 4 stays bright on La Fin)
+    // and a replay button appears.
+    if (r && v.getAttribute('data-end') === 'hold') r.classList.add('is-corner');
+    v.addEventListener('ended', function () {
+      box.classList.add('is-done');
+      if (r) r.hidden = false;
+    });
+    if (r) r.addEventListener('click', function () {
+      r.hidden = true;
+      box.classList.remove('is-done');
+      try { v.currentTime = 0; } catch (err) {}
+      play(v);
+    });
   });
 
   function startPlayback() {
@@ -146,8 +162,8 @@
     var videos = Array.prototype.slice.call(document.querySelectorAll('.scene-video'));
     if (potVideo) { potVideo.setAttribute('data-mode', 'loop'); videos.unshift(potVideo); }
 
-    // Loops play while at least a third is on screen. Scene 4 starts once at half visible,
-    // pauses if scrolled away before it ends, and holds on its last frame (La Fin).
+    // The pot loops while at least a third is on screen. Each scene starts once at half visible,
+    // pauses if scrolled away before it ends, and stays on its last frame when done.
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         var v = e.target;

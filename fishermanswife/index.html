@@ -59,23 +59,15 @@
   <header class="opening step-section" id="s-logo">
     <h1 class="sr-only">Fisherman's Wife</h1>
     <img class="logo boil-logo" src="img/logo.webp" width="1200" height="400" alt="Fisherman's Wife" fetchpriority="high">
-    <nav class="steps" data-from="s-logo" aria-label="Story navigation"><a class="step" href="#s-alert" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
+    <nav class="steps" data-from="s-logo" aria-label="Story navigation"><a class="step" href="#s-pot" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
   </header>
 
-  <!-- Phones and tablets only -->
-  <div class="touch-only">
-    <section class="alert step-section" id="s-alert">
-      <img src="img/buttons/alert-mobile.webp" width="640" height="841" alt="Mobile users: please turn off Low Power Mode, or the videos will not load." loading="lazy">
-    </section>
-    <nav class="steps" data-from="s-alert" aria-label="Story navigation"><a class="step" href="#s-logo" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-pot" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
-  </div>
 
   <div class="pot step-section" id="s-pot">
     <video class="pot-media" id="pot-video" muted loop playsinline preload="auto" aria-label="A red pot whose lid flies off as fish and steam rise and the byline By Stephanie M Kim appears">
       <source src="video/pot.webm" type="video/webm">
     </video>
   </div>
-  <nav class="steps" data-from="s-pot" aria-label="Story navigation"><a class="step" href="#s-alert" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene1" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene one -->
   <div class="title-card boil-c step-section" id="s-scene1">
@@ -88,12 +80,12 @@
   </section>
   <figure class="scene">
     <div class="scene-box">
-      <video class="scene-video" data-mode="loop" src="video/scene-01.mp4" poster="img/posters/scene-01.webp" muted loop playsinline preload="auto" aria-label="The fisherman's wife chops vegetables in her kitchen"></video>
-      <button class="tap-play" type="button" aria-label="Play this scene" hidden><span aria-hidden="true"></span></button>
+      <video class="scene-video" data-mode="once" src="video/scene-01.mp4" poster="img/posters/scene-01.webp" muted playsinline preload="auto" aria-label="The fisherman's wife chops vegetables in her kitchen"></video>
+      <button class="tap-play" type="button" hidden><span class="tap-icon" aria-hidden="true"></span><span class="tap-note">Low Power Mode is on. Tap to play.</span></button>
+      <button class="replay" type="button" aria-label="Replay this scene" hidden><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="#F6F6D5"/></svg></button>
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true">
     </div>
   </figure>
-  <nav class="steps" data-from="s-scene1" aria-label="Story navigation"><a class="step" href="#s-pot" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene2" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene two -->
   <div class="title-card boil-d step-section" id="s-scene2">
@@ -106,12 +98,12 @@
   </section>
   <figure class="scene">
     <div class="scene-box">
-      <video class="scene-video" data-mode="loop" src="video/scene-02.mp4" poster="img/posters/scene-02.webp" muted loop playsinline preload="metadata" aria-label="The fisherman comes home holding up one small fish"></video>
-      <button class="tap-play" type="button" aria-label="Play this scene" hidden><span aria-hidden="true"></span></button>
+      <video class="scene-video" data-mode="once" src="video/scene-02.mp4" poster="img/posters/scene-02.webp" muted playsinline preload="metadata" aria-label="The fisherman comes home holding up one small fish"></video>
+      <button class="tap-play" type="button" hidden><span class="tap-icon" aria-hidden="true"></span><span class="tap-note">Low Power Mode is on. Tap to play.</span></button>
+      <button class="replay" type="button" aria-label="Replay this scene" hidden><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="#F6F6D5"/></svg></button>
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
-  <nav class="steps" data-from="s-scene2" aria-label="Story navigation"><a class="step" href="#s-scene1" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene3" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene three -->
   <div class="title-card boil-a step-section" id="s-scene3">
@@ -124,12 +116,12 @@
   </section>
   <figure class="scene">
     <div class="scene-box">
-      <video class="scene-video" data-mode="loop" src="video/scene-03.mp4" poster="img/posters/scene-03.webp" muted loop playsinline preload="metadata" aria-label="The fisherman drives up to a lit roadside burger stand at night"></video>
-      <button class="tap-play" type="button" aria-label="Play this scene" hidden><span aria-hidden="true"></span></button>
+      <video class="scene-video" data-mode="once" src="video/scene-03.mp4" poster="img/posters/scene-03.webp" muted playsinline preload="metadata" aria-label="The fisherman drives up to a lit roadside burger stand at night"></video>
+      <button class="tap-play" type="button" hidden><span class="tap-icon" aria-hidden="true"></span><span class="tap-note">Low Power Mode is on. Tap to play.</span></button>
+      <button class="replay" type="button" aria-label="Replay this scene" hidden><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="#F6F6D5"/></svg></button>
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
-  <nav class="steps" data-from="s-scene3" aria-label="Story navigation"><a class="step" href="#s-scene2" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step" href="#s-scene4" data-step="next"><img src="img/buttons/scroll-continue.webp" width="304" height="143" alt="Continue"></a></nav>
 
   <!-- Scene four: plays once and holds on La Fin -->
   <div class="title-card boil-b step-section" id="s-scene4">
@@ -143,12 +135,13 @@
   </section>
   <figure class="scene">
     <div class="scene-box">
-      <video class="scene-video" data-mode="once" src="video/scene-04.mp4" poster="img/posters/scene-04.webp" muted playsinline preload="metadata" aria-label="The fisherman drives through the desert with his fish and fries, ending on La Fin"></video>
-      <button class="tap-play" type="button" aria-label="Play this scene" hidden><span aria-hidden="true"></span></button>
+      <video class="scene-video" data-mode="once" data-end="hold" src="video/scene-04.mp4" poster="img/posters/scene-04.webp" muted playsinline preload="metadata" aria-label="The fisherman drives through the desert with his fish and fries, ending on La Fin"></video>
+      <button class="tap-play" type="button" hidden><span class="tap-icon" aria-hidden="true"></span><span class="tap-note">Low Power Mode is on. Tap to play.</span></button>
+      <button class="replay" type="button" aria-label="Replay this scene" hidden><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="#F6F6D5"/></svg></button>
       <img class="scene-frame" src="img/frame/video-frame.webp" srcset="img/frame/video-frame-1200.webp 1200w, img/frame/video-frame.webp 2080w" sizes="(max-width: 1100px) 100vw, 1040px" width="2080" height="1352" alt="" aria-hidden="true" loading="lazy">
     </div>
   </figure>
-  <nav class="steps" data-from="s-scene4" aria-label="Story navigation"><a class="step" href="#s-scene3" data-step="back"><img src="img/buttons/scroll-return.webp" width="304" height="155" alt="Go back"></a><a class="step step-begin" href="#s-logo" data-step="begin"><img src="img/buttons/scroll-beginning.webp" width="550" height="168" alt="Start from the beginning"></a></nav>
+  <nav class="steps" data-from="s-scene4" aria-label="Story navigation"><a class="step step-begin" href="#s-logo" data-step="begin"><img src="img/buttons/scroll-beginning.webp" width="550" height="168" alt="Start from the beginning"></a></nav>
 
 </main>
 
