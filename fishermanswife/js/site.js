@@ -96,10 +96,24 @@
   go.addEventListener('click', enter);
 
   /* ---------- Playback on scroll ---------- */
+  // If the browser blocks autoplay (iPhone Low Power Mode, data saver), show a play button instead
+  function tapButton(v) {
+    var box = v.parentNode;
+    return box && box.querySelector ? box.querySelector('.tap-play') : null;
+  }
   function play(v) {
     var p = v.play();
-    if (p && p.catch) p.catch(function () {});
+    if (p && p.catch) p.catch(function () {
+      var b = tapButton(v);
+      if (b) b.hidden = false;
+    });
   }
+  Array.prototype.forEach.call(document.querySelectorAll('.scene-video'), function (v) {
+    var b = tapButton(v);
+    if (!b) return;
+    b.addEventListener('click', function () { b.hidden = true; play(v); });
+    v.addEventListener('playing', function () { b.hidden = true; });
+  });
 
   function startPlayback() {
     if (!('IntersectionObserver' in window)) {
