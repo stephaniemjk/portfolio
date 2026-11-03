@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '7'
+CSSV = '8'
 
 NAV = [
     ('/', 'About', 'about'),
@@ -21,7 +21,7 @@ NAV = [
     ('/interactive', 'Interactive Web', 'interactive'),
     ('/film-writing', 'Film Writing', 'film'),
 ]
-DESC = "Stephanie Kim: illustration, animation, interactive web and film writing from New York."
+DESC = "Stephanie M. Kim: illustration, animation, interactive web and film writing from New York."
 
 
 def read(*parts):
@@ -33,7 +33,7 @@ def page(title, active, main, desc=DESC):
     nav = '\n        '.join(
         f'<a{" class=\"is-active\" aria-current=\"page\"" if key == active else ""} href="{href}">{name}</a>'
         for href, name, key in NAV)
-    full = "Stephanie Kim" if title is None else f"{title} | Stephanie Kim"
+    full = "Stephanie M. Kim" if title is None else f"{title} | Stephanie M. Kim"
     return f'''<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,13 +46,13 @@ def page(title, active, main, desc=DESC):
     <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
     <link rel="stylesheet" href="/style.css?v={CSSV}" />
   </head>
   <body>
     <main class="page">
       <header class="site-header">
-        <h1><a href="/">Stephanie Kim</a></h1>
+        <h1><a href="/">Stephanie M. Kim</a></h1>
         <nav class="nav-bar" aria-label="Primary">
         {nav}
         </nav>
@@ -222,7 +222,7 @@ for group, show_director, reviews in REVIEW_GROUPS:
         </div>
         <p class="source">Also on <a href="{r['lb']}">Letterboxd</a></p>
         <a class="back-link" href="/film-writing">← Back to Film Writing</a>
-      </article>''', desc=f"Stephanie Kim on {r['director']}’s {r['film']}.")
+      </article>''', desc=f"Stephanie M. Kim on {r['director']}’s {r['film']}.")
     items = '\n'.join(review_item(r, show_director) for r in reviews)
     sections.append(f'''        <div class="writing-section">
           <h2 class="writing-group">{group}</h2>

@@ -2,7 +2,7 @@
 
 :root {
     color-scheme: light;
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     color: #000;
     background: #fff;
     --gray: #d9d9d9;
@@ -44,7 +44,7 @@ img {
 .site-header h1 {
     margin: 0;
     font-size: clamp(32px, 4vw, 44px);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.02em;
 }
 
@@ -66,7 +66,7 @@ img {
     padding: 10px 20px;
     background: var(--gray);
     border: 1px solid transparent;
-    font-size: clamp(16px, 2.2vw, 22px);
+    font-size: clamp(14px, 1.5vw, 17px);
     transition: border-color 0.2s ease;
 }
 
@@ -84,17 +84,25 @@ img {
 
 .about-wrap {
     display: grid;
-    grid-template-columns: minmax(0, 760px);
-    gap: 32px;
+    grid-template-columns: minmax(0, 680px) minmax(200px, 320px);
+    justify-content: space-between;
+    align-items: start;
+    gap: 48px;
 }
 
 .about {
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.65;
 }
 
 .about p {
     margin: 0 0 1em;
+}
+
+.aboutimage img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .feature {
@@ -208,7 +216,7 @@ a.gallery-tile:focus-visible .tile-media img {
 .tile-text h2 {
     margin: 0;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .tile-text h2 a {
@@ -243,7 +251,7 @@ a.gallery-tile:focus-visible .tile-media img {
     padding-bottom: 10px;
     border-bottom: 1px solid #000;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
@@ -288,8 +296,8 @@ a.gallery-tile:focus-visible .tile-media img {
 
 .detail-text {
     max-width: 720px;
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
 .detail-text h3 {
@@ -321,7 +329,16 @@ a.gallery-tile:focus-visible .tile-media img {
     }
 
     .about {
-        font-size: 18px;
+        font-size: 16px;
+    }
+
+    .about-wrap {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .aboutimage {
+        max-width: 260px;
     }
 
     .feature {
@@ -355,7 +372,7 @@ a.gallery-tile:focus-visible .tile-media img {
 .kicker {
     margin: 0 0 4px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
@@ -393,7 +410,7 @@ a.gallery-tile:focus-visible .tile-media img {
 .writing-list .director {
     margin: -4px 0 8px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     color: #000;
 }
 
