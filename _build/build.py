@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '6'
+CSSV = '7'
 
 NAV = [
     ('/', 'About', 'about'),
@@ -79,7 +79,7 @@ def tile(href, img, alt, title, sub=None, badge=None):
 
 def video(yt_id, title):
     return f'''        <div class="gallery-tile">
-          <div class="tile-media">
+          <div class="tile-media video">
             <iframe src="https://www.youtube-nocookie.com/embed/{yt_id}" title="{title}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="tile-text">
@@ -144,12 +144,28 @@ FILES = {}
 
 FILES['index.html'] = page(None, 'about', '\n      ' + read('about.html'))
 
-FILES['visuals.html'] = page('Visuals', 'visuals', '''
-      <section class="gallery-grid" aria-label="Visual work">
-''' + '\n'.join(
-    [tile('/' + slug, f'/assets/img/{img}-thumb.webp', alt if img != 'public-space' else 'Digital collage of a public plaza', title)
-     for slug, title, _, img, alt, _, _ in DESIGNS]
-    + [video(i, t) for i, t in VIDEOS]) + '\n      </section>')
+VISUAL_GROUPS = ('Graphics', 'Animations')
+
+graphics = '\n'.join(
+    tile('/' + slug, f'/assets/img/{img}-thumb.webp', alt, title)
+    for slug, title, _, img, alt, _, _ in DESIGNS)
+animations = '\n'.join(video(i, t) for i, t in VIDEOS)
+
+
+def visuals_col(name, tiles):
+    return f'''        <section class="visuals-col" aria-labelledby="col-{name.lower()}">
+          <h2 class="col-head" id="col-{name.lower()}">{name}</h2>
+          <div class="stack">
+{tiles}
+          </div>
+        </section>'''
+
+
+FILES['visuals.html'] = page('Visuals', 'visuals', f'''
+      <div class="visuals-cols">
+{visuals_col(VISUAL_GROUPS[0], graphics)}
+{visuals_col(VISUAL_GROUPS[1], animations)}
+      </div>''')
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
       <section class="gallery-grid" aria-label="Interactive web projects">
@@ -160,7 +176,10 @@ FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
 for slug, title, frag, img, alt, w, h in DESIGNS:
     FILES[slug + '.html'] = page(title, 'visuals', f'''
       <article class="detail">
-        <h2>{title}</h2>
+        <div>
+          <p class="kicker">{VISUAL_GROUPS[0]}</p>
+          <h2>{title}</h2>
+        </div>
         <img class="detail-image" src="/assets/img/{img}.webp" alt="{alt}" width="{w}" height="{h}" />
         <div class="detail-text">
           {read('designs', frag + '.html')}

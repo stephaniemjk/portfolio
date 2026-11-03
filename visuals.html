@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
-    <link rel="stylesheet" href="/style.css?v=6" />
+    <link rel="stylesheet" href="/style.css?v=7" />
   </head>
   <body>
     <main class="page">
@@ -25,7 +25,10 @@
         </nav>
       </header>
 
-      <section class="gallery-grid" aria-label="Visual work">
+      <div class="visuals-cols">
+        <section class="visuals-col" aria-labelledby="col-graphics">
+          <h2 class="col-head" id="col-graphics">Graphics</h2>
+          <div class="stack">
         <a class="gallery-tile" href="/designs-grid-de-sac">
           <div class="tile-media">
             <img src="/assets/img/grid-de-sac-thumb.webp" alt="Grid-de-Sac" loading="lazy" />
@@ -44,14 +47,19 @@
         </a>
         <a class="gallery-tile" href="/designs-publicspace">
           <div class="tile-media">
-            <img src="/assets/img/public-space-thumb.webp" alt="Digital collage of a public plaza" loading="lazy" />
+            <img src="/assets/img/public-space-thumb.webp" alt="Digital collage of a public plaza inspired by Cité Radieuse" loading="lazy" />
           </div>
           <div class="tile-text">
             <h2>Assembly at Radiant Square</h2>
           </div>
         </a>
+          </div>
+        </section>
+        <section class="visuals-col" aria-labelledby="col-animations">
+          <h2 class="col-head" id="col-animations">Animations</h2>
+          <div class="stack">
         <div class="gallery-tile">
-          <div class="tile-media">
+          <div class="tile-media video">
             <iframe src="https://www.youtube-nocookie.com/embed/oGl9cEbhAxA" title="Harmless Guests" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="tile-text">
@@ -59,14 +67,16 @@
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media">
+          <div class="tile-media video">
             <iframe src="https://www.youtube-nocookie.com/embed/mzmz8qlgKCY" title="Le Train" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="tile-text">
             <h2>Le Train</h2>
           </div>
         </div>
-      </section>
+          </div>
+        </section>
+      </div>
     </main>
   </body>
 </html>
