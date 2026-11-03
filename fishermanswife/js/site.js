@@ -100,7 +100,7 @@
   function sections() {
     return Array.prototype.filter.call(document.querySelectorAll('.step-section'), visible);
   }
-  Array.prototype.forEach.call(document.querySelectorAll('.steps .step'), function (a) {
+  Array.prototype.forEach.call(document.querySelectorAll('.steps .step[data-step]'), function (a) {
     a.addEventListener('click', function (e) {
       var list = sections();
       var from = document.getElementById(a.parentNode.getAttribute('data-from'));
@@ -112,6 +112,24 @@
       target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
   });
+
+  /* ---------- Back to top ---------- */
+  var up = document.querySelector('.go-up');
+  if (up) {
+    var upTick = false;
+    var upCheck = function () {
+      upTick = false;
+      up.classList.toggle('is-shown', window.scrollY > window.innerHeight * 0.9);
+    };
+    window.addEventListener('scroll', function () {
+      if (!upTick) { upTick = true; requestAnimationFrame(upCheck); }
+    }, { passive: true });
+    upCheck();
+    up.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
 
   /* ---------- Playback on scroll ---------- */
   // If the browser blocks autoplay (iPhone Low Power Mode, data saver), show a play button instead

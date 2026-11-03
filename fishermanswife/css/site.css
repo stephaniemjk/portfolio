@@ -137,11 +137,24 @@ html { scroll-behavior: smooth; }
 }
 .step { display: block; border-radius: 8px; }
 .step img { display: block; width: 150px; height: auto; }
-.step-begin img { width: 240px; }
+.step-home img { width: 240px; }
 .step:hover img { transform: translateY(-2px); }
 .step img { transition: transform .2s ease; }
 .step:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
 .opening .steps { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: clamp(24px, 6vh, 64px); }
+
+/* Back to top: fixed on the right, appears once the reader is past the opening */
+.go-up {
+  position: fixed; right: max(20px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  z-index: 50; display: block; border-radius: 50%; padding: 4px;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.go-up.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity .25s ease, transform .25s ease; }
+.go-up img { display: block; width: 52px; height: 52px; transition: transform .2s ease; }
+.go-up:hover img { transform: translateY(-3px); }
+.go-up:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.is-loading .go-up { display: none; }
 
 
 .pot { width: 512px; max-width: 100%; transform: translateX(-6.1%); margin-bottom: 80px; }
@@ -214,6 +227,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   html.js .reveal { transform: none; transition: opacity .4s ease; }
   html { scroll-behavior: auto; }
   .step img { transition: none; }
+  .go-up, .go-up.is-shown, .go-up img { transition: none; }
   .scene-video { transition: none; }
   .replay { animation: none; }
   .loader, .loader-go { transition: none; }
@@ -229,5 +243,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .tap-note { font-size: 13px; }
   .steps { margin-top: -16px; }
   .step img { width: 120px; }
-  .step-begin img { width: 200px; }
+  .step-home img { width: 200px; }
+  .go-up { right: 12px; bottom: 16px; }
+  .go-up img { width: 42px; height: 42px; }
 }
