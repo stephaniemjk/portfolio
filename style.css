@@ -62,7 +62,7 @@ a:focus-visible {
     justify-content: space-between;
     gap: 16px 32px;
     padding-bottom: 20px;
-    border-bottom: 3px dotted var(--bold);
+    border-bottom: 3px dotted var(--text);
 }
 
 .site-header h1 {
@@ -73,7 +73,7 @@ a:focus-visible {
 }
 
 .site-header h1 a {
-    color: var(--link);
+    color: var(--text);
     text-decoration: none;
 }
 
@@ -85,7 +85,7 @@ a:focus-visible {
 }
 
 .nav-bar a {
-    color: var(--text);
+    color: var(--link);
     text-decoration: none;
     font-size: clamp(15px, 1.5vw, 18px);
     padding: 4px 0;
