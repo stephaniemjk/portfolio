@@ -296,8 +296,14 @@ a.gallery-tile:focus-visible .tile-media img {
 .writing {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 48px;
     max-width: 760px;
+}
+
+.writing-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .writing-group,
@@ -337,6 +343,13 @@ a.gallery-tile:focus-visible .tile-media img {
 .writing-list a:focus-visible h3 {
     text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+.writing-list .director {
+    margin: -4px 0 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
 }
 
 .writing-list p {
