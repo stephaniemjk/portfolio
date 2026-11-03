@@ -2,30 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Branding System | Stephanie Kim</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chez Kim | Stephanie Kim</title>
+    <meta name="description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:title" content="Chez Kim | Stephanie Kim" />
+    <meta property="og:description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <main class="page">
       <header class="site-header">
-        <div>
-          <h1>Stephanie Kim</h1>
-          <p class="subtitle">Designs.</p>
-        </div>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html">Welcome</a>
-          <a class="is-active" href="designs.html">Designs</a>
-          <a class="" href="animations.html">Animations</a>
-          <a class="" href="film-writing.html">Film Writing</a>
+        <h1><a href="/">Stephanie Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a class="is-active" aria-current="page" href="/designs">Designs</a>
+        <a href="/animations">Animations</a>
         </nav>
       </header>
 
-      <section class="detail-card" aria-label="ChezKim">
+      <article class="detail">
         <h2>Chez Kim</h2>
-        <p>This piece was inspired by many of those restaurants nestled in newly gentrified, formerly industrial neighborhoods. Their farm-to-table menu is very expensive, low in protein, and metabolizes far too quickly. The interior is super white and rustic, and they have a chalkboard filled with illegible and calligraphed menu items. Welcome to Chez Kim!
-</p>
-        <a class="detail-link" href="designs.html">← Back to Designs</a>
-      </section>
+        <img class="detail-image" src="/assets/img/chez-kim.webp" alt="Chez Kim" width="2000" height="1600" />
+        <div class="detail-text">
+          <p>This piece was inspired by many of those restaurants nestled in newly gentrified, formerly industrial neighborhoods. Their farm-to-table menu is very expensive, low in protein, and metabolizes far too quickly. The interior is super white and rustic, and they have a chalkboard filled with illegible and calligraphed menu items. Welcome to Chez Kim!</p>
+        </div>
+        <a class="back-link" href="/designs">← Back to Designs</a>
+      </article>
     </main>
   </body>
 </html>

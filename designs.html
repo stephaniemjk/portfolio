@@ -2,47 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Designs | Stephanie Kim</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:title" content="Designs | Stephanie Kim" />
+    <meta property="og:description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <main class="page">
       <header class="site-header">
-        <div>
-          <h1>Stephanie Kim</h1>
-          <p class="subtitle">Design gallery.</p>
-        </div>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html">Welcome</a>
-          <a class="is-active" href="designs.html">Designs</a>
-          <a href="animations.html">Animations</a>
-          <a href="film-writing.html">Film Writing</a>
+        <h1><a href="/">Stephanie Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a class="is-active" aria-current="page" href="/designs">Designs</a>
+        <a href="/animations">Animations</a>
         </nav>
       </header>
 
       <section class="gallery-grid" aria-label="Design projects">
-        <a class="gallery-title" href="designs-grid-de-sac.html" id="grid-de-sac">
+        <a class="gallery-tile" href="/designs-grid-de-sac">
           <div class="tile-media">
-            <img src="assets/grid-de-sac" alt="Grid-De-Sac" />
+            <img src="/assets/img/grid-de-sac-thumb.webp" alt="Grid-de-Sac" loading="lazy" />
           </div>
           <div class="tile-text">
             <h2>Grid-de-Sac</h2>
           </div>
         </a>
-        <a class="gallery-title" href="designs-chezkim.html" id="chezkim">
+        <a class="gallery-tile" href="/designs-chezkim">
           <div class="tile-media">
-            <img src="assets/chezkim.jpg" alt="Chez Kim" />
+            <img src="/assets/img/chez-kim-thumb.webp" alt="Chez Kim" loading="lazy" />
           </div>
           <div class="tile-text">
             <h2>Chez Kim</h2>
           </div>
         </a>
-        <a class="gallery-title" href="designs-publicspace.html" id="public space">
+        <a class="gallery-tile" href="/designs-publicspace">
           <div class="tile-media">
-            <img src="assets/Public Space Final.png" alt="Public Space" />
+            <img src="/assets/img/public-space-thumb.webp" alt="Digital collage of a public plaza" loading="lazy" />
           </div>
           <div class="tile-text">
-            <h2>Public Space</h2>
+            <h2>Assembly at Radiant Square</h2>
           </div>
         </a>
       </section>

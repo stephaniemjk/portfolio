@@ -2,66 +2,54 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Animations | Stephanie Kim</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:title" content="Animations | Stephanie Kim" />
+    <meta property="og:description" content="Stephanie Kim: illustration, design and animation from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <main class="page">
       <header class="site-header">
-        <div>
-          <h1>Stephanie Kim</h1>
-          <p class="subtitle">Animation gallery.</p>
-        </div>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html">Welcome</a>
-          <a href="designs.html">Designs</a>
-          <a class="is-active" href="animations.html">Animations</a>
-          <a href="film-writing.html">Film Writing</a>
+        <h1><a href="/">Stephanie Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a href="/designs">Designs</a>
+        <a class="is-active" aria-current="page" href="/animations">Animations</a>
         </nav>
       </header>
 
       <section class="gallery-grid" aria-label="Animation projects">
-        <a class="gallery-title" href="animations-fishermans-wife.html" id="motion-study">
+        <a class="gallery-tile" href="/fishermanswife/">
           <div class="tile-media">
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Y6LloJQ9eOU?si=qG2QZ08CCK8L4O1l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-            <span class="tile-badge">mp4</span>
+            <img src="/fishermanswife/img/posters/scene-01.webp" alt="A painted kitchen scene from Fisherman’s Wife" loading="lazy" />
+            <span class="tile-badge">Interactive</span>
           </div>
           <div class="tile-text">
-            <h2>Fisherman's Wife</h2>
+            <h2>Fisherman’s Wife</h2><p>An animated folk tale, made to be scrolled.</p>
           </div>
         </a>
-        <a class="gallery-title" href="animations-harmlessguests.html" id="character-loop">
+        <div class="gallery-tile">
           <div class="tile-media">
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/oGl9cEbhAxA?si=UKnh3t6XASEy20Ej" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <span class="tile-badge">mp4</span>
+            <iframe src="https://www.youtube-nocookie.com/embed/oGl9cEbhAxA" title="Harmless Guests" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="tile-text">
-            <h2>Character Loop</h2>
-            <p>A looping gesture test.</p>
+            <h2>Harmless Guests</h2>
           </div>
-        </a>
-        <a class="gallery-title" href="animations-le-train" id="le train">
+        </div>
+        <div class="gallery-tile">
           <div class="tile-media">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/mzmz8qlgKCY?si=C5slBkDFGN1ImjMG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>            <span class="tile-badge">mp4</span>
+            <iframe src="https://www.youtube-nocookie.com/embed/mzmz8qlgKCY" title="Le Train" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="tile-text">
-            <h2>Title Sequence</h2>
-            <p>Experimental typography animation.</p>
+            <h2>Le Train</h2>
           </div>
-        </a>
-        <a class="gallery-title" href="animations-lighting-test.html" id="lighting-test">
-          <div class="tile-media">
-            <img src="assets/photo.jpg" alt="Lighting test" />
-            <span class="tile-badge">mp4</span>
-          </div>
-          <div class="tile-text">
-            <h2>Lighting Test</h2>
-            <p>Atmospheric scene exploration.</p>
-          </div>
-        </a>
+        </div>
       </section>
     </main>
   </body>

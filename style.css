@@ -1,17 +1,25 @@
+/* One stylesheet for every page. Look carried over from the homepage. */
+
 :root {
     color-scheme: light;
     font-family: "Inter", system-ui, sans-serif;
     color: #000;
     background: #fff;
+    --gray: #d9d9d9;
+    --muted: #555;
 }
 
 * {
-    box-sizing: border-box;    
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
 }
 
 .page {
@@ -20,8 +28,10 @@ body {
     padding: 48px 0 80px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 40px;
 }
+
+/* Header and nav */
 
 .site-header {
     display: flex;
@@ -31,12 +41,16 @@ body {
     gap: 24px;
 }
 
-.site-header h1{
-    margin: 0 0 6px;
+.site-header h1 {
+    margin: 0;
     font-size: clamp(32px, 4vw, 44px);
     font-weight: 600;
-    color: #000000;
     letter-spacing: 0.02em;
+}
+
+.site-header h1 a {
+    color: inherit;
+    text-decoration: none;
 }
 
 .nav-bar {
@@ -46,60 +60,233 @@ body {
     align-items: center;
 }
 
-.nav-bar a{
+.nav-bar a {
     text-decoration: none;
-    color: #000000;
+    color: #000;
     padding: 10px 20px;
-    background: #d9d9d9;
+    background: var(--gray);
     border: 1px solid transparent;
-    font-size: clamp(16px, 2.2vw, 24px);
-    transition: all 0.2s ease;
+    font-size: clamp(16px, 2.2vw, 22px);
+    transition: border-color 0.2s ease;
 }
 
 .nav-bar a:hover,
-.nav-bar a:focus{
-    border-color: #000000;
+.nav-bar a:focus-visible {
+    border-color: #000;
 }
 
-.nav-bar a.is-active{
-    background: #000000;
+.nav-bar a.is-active {
+    background: #000;
     color: #fff;
 }
 
+/* About */
+
 .about-wrap {
-    display:grid;
-    grid-template-columns: minmax (320px, 1fr) minmax(220px, 320px);
-    align-items:start
+    display: grid;
+    grid-template-columns: minmax(0, 760px);
     gap: 32px;
 }
+
 .about {
     font-size: 20px;
-    color: #000000;
     line-height: 1.5;
 }
 
-.about p{
-    margin-top: 0;
+.about p {
+    margin: 0 0 1em;
 }
 
-.aboutimage {
+.feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+.feature img {
     width: 100%;
-    max-width: 320px;
-    justify-self: end;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
 }
 
-.aboutimage img{
+.feature .label {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px;
+}
+
+.feature h2 {
+    font-size: clamp(26px, 3vw, 36px);
+    margin: 0 0 12px;
+}
+
+.feature p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.feature .cta {
+    display: inline-block;
+    margin-top: 16px;
+    border-bottom: 1px solid #000;
+}
+
+.feature:hover .cta,
+.feature:focus-visible .cta {
+    border-bottom-width: 2px;
+}
+
+/* Galleries */
+
+.page-intro {
+    margin: 0;
+    font-size: 18px;
+    color: var(--muted);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+.gallery-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.tile-media {
+    position: relative;
+    background: #eee;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.tile-media img,
+.tile-media iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.tile-media img {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+a.gallery-tile:hover .tile-media img,
+a.gallery-tile:focus-visible .tile-media img {
+    transform: scale(1.03);
+}
+
+.tile-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tile-text h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.tile-text h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.tile-text p {
+    margin: 4px 0 0;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+/* Project pages */
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.detail h2 {
+    margin: 0;
+    font-size: clamp(28px, 3.5vw, 40px);
+}
+
+.detail-image {
     width: 100%;
     height: auto;
     display: block;
 }
 
-@media (max-width: 900px){
-    .about-wrap{
-        grid-template-columns: 1fr;
+.detail-text {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.detail-text h3 {
+    font-size: 20px;
+    margin: 1.6em 0 0.4em;
+}
+
+.detail-text p {
+    margin: 0 0 1em;
+}
+
+.back-link {
+    color: #000;
+    font-size: 16px;
+}
+
+@media (max-width: 760px) {
+    .page {
+        padding-top: 28px;
+        gap: 28px;
     }
 
-    .aboutimage{
-        justify-self: start;
+    .site-header {
+        align-items: flex-start;
+    }
+
+    .nav-bar a {
+        padding: 8px 14px;
+    }
+
+    .about {
+        font-size: 18px;
+    }
+
+    .feature {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }
