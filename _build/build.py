@@ -107,24 +107,10 @@ LETTERBOXD = 'https://letterboxd.com/saucygarlicbaby/'
 
 # (group name, show director on each entry, reviews)
 REVIEW_GROUPS = [
-    ('Whit Stillman', False, [
-        dict(slug='film-writing-last-days-of-disco', film='The Last Days of Disco', year='1998',
-             director='Whit Stillman', src='disco.txt',
-             lb='https://letterboxd.com/saucygarlicbaby/film/the-last-days-of-disco/1/'),
-        dict(slug='film-writing-barcelona', film='Barcelona', year='1994',
-             director='Whit Stillman', src='barcelona.txt',
-             lb='https://letterboxd.com/saucygarlicbaby/film/barcelona/reviews/'),
-    ]),
     ('French New Wave', True, [
-        dict(slug='film-writing-elevator-to-the-gallows', film='Elevator to the Gallows', year='1958',
-             director='Louis Malle', src='elevator.txt',
-             lb='https://letterboxd.com/saucygarlicbaby/film/elevator-to-the-gallows/'),
         dict(slug='film-writing-the-lovers', film='The Lovers', year='1958',
              director='Louis Malle', src='lovers.txt',
              lb='https://letterboxd.com/saucygarlicbaby/film/the-lovers/'),
-        dict(slug='film-writing-the-cousins', film='The Cousins', year='1959',
-             director='Claude Chabrol', src='cousins.txt',
-             lb='https://letterboxd.com/saucygarlicbaby/film/the-cousins-1959/'),
         dict(slug='film-writing-vivre-sa-vie', film='Vivre Sa Vie', year='1962',
              director='Jean-Luc Godard', src='vivre.txt',
              lb='https://letterboxd.com/saucygarlicbaby/film/vivre-sa-vie/'),
@@ -132,6 +118,24 @@ REVIEW_GROUPS = [
              director='Jean-Luc Godard', src='masculin.txt',
              lb='https://letterboxd.com/saucygarlicbaby/film/masculin-feminin/'),
     ]),
+]
+
+# Pulled from the site for now. Texts stay in _build/reviews/.
+# To restore one, move it back into a group above, delete its line in
+# _redirects, and rebuild.
+PULLED = [
+    dict(slug='film-writing-last-days-of-disco', film='The Last Days of Disco', year='1998',
+         director='Whit Stillman', src='disco.txt',
+         lb='https://letterboxd.com/saucygarlicbaby/film/the-last-days-of-disco/1/'),
+    dict(slug='film-writing-barcelona', film='Barcelona', year='1994',
+         director='Whit Stillman', src='barcelona.txt',
+         lb='https://letterboxd.com/saucygarlicbaby/film/barcelona/reviews/'),
+    dict(slug='film-writing-elevator-to-the-gallows', film='Elevator to the Gallows', year='1958',
+         director='Louis Malle', src='elevator.txt',
+         lb='https://letterboxd.com/saucygarlicbaby/film/elevator-to-the-gallows/'),
+    dict(slug='film-writing-the-cousins', film='The Cousins', year='1959',
+         director='Claude Chabrol', src='cousins.txt',
+         lb='https://letterboxd.com/saucygarlicbaby/film/the-cousins-1959/'),
 ]
 
 # ---------- Pages ----------
@@ -181,6 +185,8 @@ def review_item(r, show_director):
 
 sections = []
 for group, show_director, reviews in REVIEW_GROUPS:
+    if not reviews:
+        continue
     for r in reviews:
         ps = paragraphs(read('reviews', r['src']))
         r['excerpt'] = re.split(r'(?<=[.!?”])\s', ps[0])[0]
