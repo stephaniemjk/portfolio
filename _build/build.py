@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '9'
+CSSV = '10'
 
 NAV = [
     ('/', 'About', 'about'),

@@ -62,7 +62,7 @@ a:focus-visible {
     justify-content: space-between;
     gap: 16px 32px;
     padding-bottom: 20px;
-    border-bottom: 3px dotted var(--text);
+    border-bottom: 3px dotted var(--link);
 }
 
 .site-header h1 {
@@ -73,7 +73,7 @@ a:focus-visible {
 }
 
 .site-header h1 a {
-    color: inherit;
+    color: var(--bold);
     text-decoration: none;
 }
 
@@ -85,7 +85,7 @@ a:focus-visible {
 }
 
 .nav-bar a {
-    color: var(--link);
+    color: var(--text);
     text-decoration: none;
     font-size: clamp(15px, 1.5vw, 18px);
     padding: 4px 0;
@@ -96,8 +96,9 @@ a:focus-visible {
     text-underline-offset: 6px;
 }
 
+.nav-bar a:active,
 .nav-bar a.is-active {
-    color: var(--text);
+    color: var(--bold);
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
