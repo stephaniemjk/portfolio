@@ -1,12 +1,17 @@
-/* One stylesheet for every page. Look carried over from the homepage. */
+/* One stylesheet for every page of stephaniemkim.com (not /fishermanswife). */
 
 :root {
     color-scheme: light;
+    --bg: #f7f7f7;
+    --text: #000a3f;
+    --link: #e54100;
+    --bold: #3633ce;
+    --muted: #4d5379;
+    --rule: #c8cad6;
+    --media: #e8e9ee;
     font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    color: #000;
-    background: #fff;
-    --gray: #d9d9d9;
-    --muted: #555;
+    color: var(--text);
+    background: var(--bg);
 }
 
 * {
@@ -16,10 +21,27 @@
 body {
     margin: 0;
     min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
 }
 
 img {
     max-width: 100%;
+}
+
+a {
+    color: var(--link);
+}
+
+b,
+strong {
+    color: var(--bold);
+    font-weight: 500;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
 }
 
 .page {
@@ -38,14 +60,16 @@ img {
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px 32px;
+    padding-bottom: 20px;
+    border-bottom: 3px dotted var(--text);
 }
 
 .site-header h1 {
     margin: 0;
-    font-size: clamp(32px, 4vw, 44px);
+    font-size: clamp(30px, 4vw, 44px);
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
 }
 
 .site-header h1 a {
@@ -56,28 +80,27 @@ img {
 .nav-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px 28px;
     align-items: center;
 }
 
 .nav-bar a {
+    color: var(--link);
     text-decoration: none;
-    color: #000;
-    padding: 10px 20px;
-    background: var(--gray);
-    border: 1px solid transparent;
-    font-size: clamp(14px, 1.5vw, 17px);
-    transition: border-color 0.2s ease;
+    font-size: clamp(15px, 1.5vw, 18px);
+    padding: 4px 0;
 }
 
-.nav-bar a:hover,
-.nav-bar a:focus-visible {
-    border-color: #000;
+.nav-bar a:hover {
+    text-decoration: underline;
+    text-underline-offset: 6px;
 }
 
 .nav-bar a.is-active {
-    background: #000;
-    color: #fff;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
 }
 
 /* About */
@@ -105,60 +128,7 @@ img {
     display: block;
 }
 
-.feature {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 32px;
-    align-items: center;
-    color: inherit;
-    text-decoration: none;
-}
-
-.feature img {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-}
-
-.feature .label {
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 8px;
-}
-
-.feature h2 {
-    font-size: clamp(26px, 3vw, 36px);
-    margin: 0 0 12px;
-}
-
-.feature p {
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-.feature .cta {
-    display: inline-block;
-    margin-top: 16px;
-    border-bottom: 1px solid #000;
-}
-
-.feature:hover .cta,
-.feature:focus-visible .cta {
-    border-bottom-width: 2px;
-}
-
 /* Galleries */
-
-.page-intro {
-    margin: 0;
-    font-size: 18px;
-    color: var(--muted);
-}
 
 .gallery-grid {
     display: grid;
@@ -176,7 +146,7 @@ img {
 
 .tile-media {
     position: relative;
-    background: #eee;
+    background: var(--media);
     aspect-ratio: 16 / 10;
     overflow: hidden;
 }
@@ -201,12 +171,18 @@ a.gallery-tile:focus-visible .tile-media img {
     transform: scale(1.03);
 }
 
+a.gallery-tile:hover h2,
+a.gallery-tile:focus-visible h2 {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 .tile-badge {
     position: absolute;
     top: 12px;
     left: 12px;
-    background: #000;
-    color: #fff;
+    background: var(--text);
+    color: var(--bg);
     font-size: 12px;
     padding: 4px 10px;
     letter-spacing: 0.08em;
@@ -215,13 +191,9 @@ a.gallery-tile:focus-visible .tile-media img {
 
 .tile-text h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-}
-
-.tile-text h2 a {
-    color: inherit;
-    text-decoration: none;
+    color: var(--bold);
 }
 
 .tile-text p {
@@ -249,7 +221,7 @@ a.gallery-tile:focus-visible .tile-media img {
 .visuals-col .col-head {
     margin: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid var(--text);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -267,14 +239,7 @@ a.gallery-tile:focus-visible .tile-media img {
     aspect-ratio: 16 / 9;
 }
 
-@media (max-width: 760px) {
-    .visuals-cols {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-}
-
-/* Project pages */
+/* Project and review pages */
 
 .detail {
     display: flex;
@@ -285,7 +250,9 @@ a.gallery-tile:focus-visible .tile-media img {
 
 .detail h2 {
     margin: 0;
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(26px, 3.4vw, 38px);
+    font-weight: 500;
+    color: var(--bold);
 }
 
 .detail-image {
@@ -301,7 +268,9 @@ a.gallery-tile:focus-visible .tile-media img {
 }
 
 .detail-text h3 {
-    font-size: 20px;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--bold);
     margin: 1.6em 0 0.4em;
 }
 
@@ -310,47 +279,7 @@ a.gallery-tile:focus-visible .tile-media img {
 }
 
 .back-link {
-    color: #000;
     font-size: 16px;
-}
-
-@media (max-width: 760px) {
-    .page {
-        padding-top: 28px;
-        gap: 28px;
-    }
-
-    .site-header {
-        align-items: flex-start;
-    }
-
-    .nav-bar a {
-        padding: 8px 14px;
-    }
-
-    .about {
-        font-size: 16px;
-    }
-
-    .about-wrap {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .aboutimage {
-        max-width: 260px;
-    }
-
-    .feature {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-    }
 }
 
 /* Film writing */
@@ -382,11 +311,11 @@ a.gallery-tile:focus-visible .tile-media img {
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--text);
 }
 
 .writing-list li {
-    border-bottom: 1px solid var(--gray);
+    border-bottom: 1px solid var(--rule);
 }
 
 .writing-list a {
@@ -398,7 +327,9 @@ a.gallery-tile:focus-visible .tile-media img {
 
 .writing-list h3 {
     margin: 0 0 8px;
-    font-size: clamp(22px, 2.6vw, 28px);
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 500;
+    color: var(--bold);
 }
 
 .writing-list a:hover h3,
@@ -411,13 +342,13 @@ a.gallery-tile:focus-visible .tile-media img {
     margin: -4px 0 8px;
     font-size: 15px;
     font-weight: 500;
-    color: #000;
+    color: var(--text);
 }
 
 .writing-list p {
     margin: 0;
-    font-size: 17px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.6;
     color: var(--muted);
 }
 
@@ -435,6 +366,44 @@ cite {
     font-size: 16px;
 }
 
-.source a {
-    color: #000;
+/* Phone */
+
+@media (max-width: 760px) {
+    .page {
+        padding-top: 28px;
+        gap: 28px;
+    }
+
+    .site-header {
+        align-items: flex-start;
+        padding-bottom: 16px;
+    }
+
+    .nav-bar {
+        gap: 8px 20px;
+    }
+
+    .about {
+        font-size: 16px;
+    }
+
+    .about-wrap {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .aboutimage {
+        max-width: 260px;
+    }
+
+    .visuals-cols {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }
