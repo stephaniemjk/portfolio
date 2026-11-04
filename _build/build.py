@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '17'
+CSSV = '18'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -83,19 +83,20 @@ def tile(href, img, alt, title, sub=None, badge=None):
         </a>'''
 
 
-def video_media(slug, title, w, h):
+def video_media(slug, title, w, h, sound):
     """A self-hosted looping video shown like a plain asset (files in assets/video/)."""
+    btn = '<button type="button" class="vid-sound" aria-pressed="false">Sound on</button>' if sound else ''
     return (f'<div class="vid" style="aspect-ratio: {w} / {h}">'
             f'<video src="/assets/video/{slug}.mp4" poster="/assets/img/{slug}-poster.webp" '
             f'autoplay muted loop playsinline preload="metadata" aria-label="{title}"></video>'
-            f'<button type="button" class="vid-sound" aria-pressed="false">Sound on</button>'
-            f'</div>')
+            f'{btn}</div>')
 
 
-def video(slug, title, w, h):
+def video(slug, title, w, h, sound):
+    # Portrait videos are capped at 75% of the screen height so they don't run a page long.
     return f'''        <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: {w} / {h}">
-            {video_media(slug, title, w, h)}
+          <div class="tile-media video" style="aspect-ratio: {w} / {h}; max-width: calc(75vh * {w} / {h})">
+            {video_media(slug, title, w, h, sound)}
           </div>
           <div class="tile-text">
             <h2>{title}</h2>
@@ -114,9 +115,15 @@ DESIGNS = [
 ]
 
 VIDEOS = [
-    # file slug (assets/video/<slug>.mp4, assets/img/<slug>-poster.webp), title, width, height
-    ('harmless-guests', 'Harmless Guests', 1920, 1080),
-    ('le-train', 'Le Train', 1600, 1200),
+    # file slug (assets/video/<slug>.mp4, assets/img/<slug>-poster.webp), title, width, height,
+    # has sound (shows the Sound on button)
+    ('harmless-guests', 'Harmless Guests', 1920, 1080, True),
+    ('nested-gloves', 'Nested Gloves in Scaffolding', 1080, 1440, False),
+    ('puppet-karate', 'Puppet Karate', 1080, 1350, False),
+    ('paint-strokes', 'Performance by the [Paint] Strokes', 1280, 720, False),
+    ('le-train', 'Le Train', 1600, 1200, True),
+    ('concrete-beach', 'Concrete Beach', 1600, 1200, True),
+    ('vending-machine', 'Vending Machine', 1200, 1500, True),
 ]
 
 LETTERBOXD = 'https://letterboxd.com/saucygarlicbaby/'
@@ -191,9 +198,9 @@ slides = [slide(VISUAL_GROUPS[0],
                 title, '/' + slug)
           for slug, title, _, img, alt, _, _ in DESIGNS]
 slides += [slide(VISUAL_GROUPS[1],
-                 video_media(slug, t, w, h),
+                 video_media(slug, t, w, h, snd),
                  t)
-           for slug, t, w, h in VIDEOS]
+           for slug, t, w, h, snd in VIDEOS]
 
 VIEW_SCRIPT = '''
       <script>
@@ -246,6 +253,7 @@ VIDEO_SCRIPT = '''
           var boxes = [].slice.call(document.querySelectorAll('.vid'));
           boxes.forEach(function (box) {
             var v = box.querySelector('video'), b = box.querySelector('.vid-sound');
+            if (!b) return;
             b.addEventListener('click', function () {
               v.muted = !v.muted;
               b.textContent = v.muted ? 'Sound on' : 'Sound off';
