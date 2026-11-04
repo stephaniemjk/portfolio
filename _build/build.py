@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '13'
+CSSV = '14'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -53,6 +53,7 @@ def page(title, active, main, desc=DESC):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
     <link rel="stylesheet" href="/style.css?v={CSSV}" />
+    <script>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <main class="page">
@@ -166,11 +167,88 @@ def visuals_col(name, tiles):
         </section>'''
 
 
+# Carousel view: every piece in one row, graphics first, then animations.
+def slide(kind, media, title, href=None):
+    t = f'<a href="{href}">{title}</a>' if href else title
+    return f'''          <li class="slide">
+            <div class="slide-media">{media}</div>
+            <p class="slide-caption"><span class="slide-kind">{kind}</span> {t}</p>
+          </li>'''
+
+
+slides = [slide(VISUAL_GROUPS[0],
+                f'<a href="/{slug}"><img src="/assets/img/{img}.webp" alt="{alt}" loading="lazy" /></a>',
+                title, '/' + slug)
+          for slug, title, _, img, alt, _, _ in DESIGNS]
+slides += [slide(VISUAL_GROUPS[1],
+                 f'<iframe src="https://www.youtube-nocookie.com/embed/{i}" title="{t}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+                 t)
+           for i, t in VIDEOS]
+
+VIEW_SCRIPT = '''
+      <script>
+        (function () {
+          var root = document.documentElement;
+          var btns = document.querySelectorAll('.view-toggle button');
+          var track = document.querySelector('.carousel-track');
+          var slides = track.querySelectorAll('.slide');
+          var count = document.querySelector('.carousel-count');
+          var prev = document.querySelector('.carousel-prev');
+          var next = document.querySelector('.carousel-next');
+          var cur = 0;
+          function setView(v) {
+            root.setAttribute('data-view', v);
+            btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === v); });
+            try { localStorage.setItem('visuals-view', v); } catch (e) {}
+          }
+          function show() {
+            count.textContent = (cur + 1) + ' / ' + slides.length;
+            prev.disabled = cur === 0;
+            next.disabled = cur === slides.length - 1;
+          }
+          function go(i) {
+            cur = Math.max(0, Math.min(slides.length - 1, i));
+            track.scrollTo({ left: slides[cur].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+            show();
+          }
+          btns.forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.view); }); });
+          prev.addEventListener('click', function () { go(cur - 1); });
+          next.addEventListener('click', function () { go(cur + 1); });
+          track.addEventListener('scroll', function () {
+            var i = Math.round(track.scrollLeft / track.clientWidth);
+            if (i !== cur) { cur = i; show(); }
+          }, { passive: true });
+          document.addEventListener('keydown', function (e) {
+            if (root.getAttribute('data-view') !== 'carousel') return;
+            if (e.key === 'ArrowLeft') go(cur - 1);
+            if (e.key === 'ArrowRight') go(cur + 1);
+          });
+          var saved = null;
+          try { saved = localStorage.getItem('visuals-view'); } catch (e) {}
+          setView(saved === 'carousel' ? 'carousel' : 'list');
+          show();
+        })();
+      </script>'''
+
 FILES['visuals.html'] = page('Visuals', 'visuals', f'''
-      <div class="visuals-cols">
+      <div class="view-toggle" role="group" aria-label="View">
+        <button type="button" data-view="list" aria-pressed="true">List</button>
+        <button type="button" data-view="carousel" aria-pressed="false">Carousel</button>
+      </div>
+      <div class="visuals-cols view-list">
 {visuals_col(VISUAL_GROUPS[0], graphics)}
 {visuals_col(VISUAL_GROUPS[1], animations)}
-      </div>''')
+      </div>
+      <section class="carousel view-carousel" aria-label="All visuals">
+        <ul class="carousel-track">
+{chr(10).join(slides)}
+        </ul>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-prev" aria-label="Previous">←</button>
+          <span class="carousel-count" aria-live="polite"></span>
+          <button type="button" class="carousel-next" aria-label="Next">→</button>
+        </div>
+      </section>{VIEW_SCRIPT}''')
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
       <section class="gallery-grid" aria-label="Interactive web projects">

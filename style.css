@@ -241,6 +241,134 @@ a.gallery-tile:focus-visible h2 {
     aspect-ratio: 16 / 9;
 }
 
+/* Visuals: list / carousel toggle */
+
+.view-toggle {
+    display: none;
+    gap: 24px;
+    margin-top: -16px;
+}
+
+.js .view-toggle {
+    display: flex;
+}
+
+.view-toggle button,
+.carousel-controls button {
+    font: inherit;
+    font-size: 15px;
+    color: var(--bold);
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.view-toggle button:hover,
+.view-toggle button[aria-pressed="true"] {
+    text-decoration: underline;
+    text-decoration-color: var(--link);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+}
+
+.view-carousel {
+    display: none;
+}
+
+[data-view="carousel"] .view-list {
+    display: none;
+}
+
+[data-view="carousel"] .view-carousel {
+    display: block;
+}
+
+.carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.slide-media {
+    position: relative;
+    height: min(calc(min(1280px, 92vw) * 9 / 16), 62vh);
+    background: var(--media);
+}
+
+.slide-media img,
+.slide-media iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    object-fit: contain;
+}
+
+.slide-caption {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--bold);
+}
+
+.slide-caption a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.slide-caption a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.slide-kind {
+    margin-right: 12px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.carousel-controls button {
+    font-size: 20px;
+}
+
+.carousel-controls button:disabled {
+    color: var(--rule);
+    cursor: default;
+}
+
+.carousel-count {
+    font-size: 15px;
+    color: var(--muted);
+}
+
 /* Project and review pages */
 
 .detail {
