@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visuals | Stephanie M. Kim</title>
+    <title>Animations | Stephanie M. Kim</title>
     <meta name="description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
-    <meta property="og:title" content="Visuals | Stephanie M. Kim" />
+    <meta property="og:title" content="Animations | Stephanie M. Kim" />
     <meta property="og:description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
     <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
-    <link rel="stylesheet" href="/style.css?v=18" />
+    <link rel="stylesheet" href="/style.css?v=19" />
     <script>document.documentElement.classList.add('js');</script>
   </head>
   <body>
@@ -20,7 +20,8 @@
         <h1><a href="/">Stephanie M. Kim</a></h1>
         <nav class="nav-bar" aria-label="Primary">
         <a href="/">About</a>
-        <a class="is-active" aria-current="page" href="/visuals">Visuals</a>
+        <a href="/graphics">Graphics</a>
+        <a class="is-active" aria-current="page" href="/animations">Animations</a>
         <a href="/interactive">Interactive Web</a>
         </nav>
       </header>
@@ -29,139 +30,93 @@
         <button type="button" data-view="list" aria-pressed="true">List</button>
         <button type="button" data-view="carousel" aria-pressed="false">Carousel</button>
       </div>
-      <div class="visuals-cols view-list">
-        <section class="visuals-col" aria-labelledby="col-graphics">
-          <h2 class="col-head" id="col-graphics">Graphics</h2>
-          <div class="stack">
-        <a class="gallery-tile" href="/designs-grid-de-sac">
-          <div class="tile-media">
-            <img src="/assets/img/grid-de-sac-thumb.webp" alt="Grid-de-Sac" loading="lazy" />
-          </div>
-          <div class="tile-text">
-            <h2>Grid-de-Sac</h2>
-          </div>
-        </a>
-        <a class="gallery-tile" href="/designs-chezkim">
-          <div class="tile-media">
-            <img src="/assets/img/chez-kim-thumb.webp" alt="Chez Kim" loading="lazy" />
-          </div>
-          <div class="tile-text">
-            <h2>Chez Kim</h2>
-          </div>
-        </a>
-        <a class="gallery-tile" href="/designs-publicspace">
-          <div class="tile-media">
-            <img src="/assets/img/public-space-thumb.webp" alt="Digital collage of a public plaza inspired by Cité Radieuse" loading="lazy" />
-          </div>
-          <div class="tile-text">
-            <h2>Assembly at Radiant Square</h2>
-          </div>
-        </a>
-          </div>
-        </section>
-        <section class="visuals-col" aria-labelledby="col-animations">
-          <h2 class="col-head" id="col-animations">Animations</h2>
-          <div class="stack">
+      <section class="gallery-grid view-list" aria-label="Animations">
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1920 / 1080; max-width: calc(75vh * 1920 / 1080)">
-            <div class="vid" style="aspect-ratio: 1920 / 1080"><video src="/assets/video/harmless-guests.mp4" poster="/assets/img/harmless-guests-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Harmless Guests"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/harmless-guests.mp4" poster="/assets/img/harmless-guests-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Harmless Guests"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Harmless Guests</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1080 / 1440; max-width: calc(75vh * 1080 / 1440)">
-            <div class="vid" style="aspect-ratio: 1080 / 1440"><video src="/assets/video/nested-gloves.mp4" poster="/assets/img/nested-gloves-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Nested Gloves in Scaffolding"></video></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/nested-gloves.mp4" poster="/assets/img/nested-gloves-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Nested Gloves in Scaffolding"></video></div>
           </div>
           <div class="tile-text">
             <h2>Nested Gloves in Scaffolding</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1080 / 1350; max-width: calc(75vh * 1080 / 1350)">
-            <div class="vid" style="aspect-ratio: 1080 / 1350"><video src="/assets/video/puppet-karate.mp4" poster="/assets/img/puppet-karate-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Puppet Karate"></video></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/puppet-karate.mp4" poster="/assets/img/puppet-karate-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Puppet Karate"></video></div>
           </div>
           <div class="tile-text">
             <h2>Puppet Karate</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1280 / 720; max-width: calc(75vh * 1280 / 720)">
-            <div class="vid" style="aspect-ratio: 1280 / 720"><video src="/assets/video/paint-strokes.mp4" poster="/assets/img/paint-strokes-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Performance by the [Paint] Strokes"></video></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/paint-strokes.mp4" poster="/assets/img/paint-strokes-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Performance by the [Paint] Strokes"></video></div>
           </div>
           <div class="tile-text">
             <h2>Performance by the [Paint] Strokes</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1600 / 1200; max-width: calc(75vh * 1600 / 1200)">
-            <div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/le-train.mp4" poster="/assets/img/le-train-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Le Train"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/le-train.mp4" poster="/assets/img/le-train-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Le Train"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Le Train</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1600 / 1200; max-width: calc(75vh * 1600 / 1200)">
-            <div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/concrete-beach.mp4" poster="/assets/img/concrete-beach-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Concrete Beach"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/concrete-beach.mp4" poster="/assets/img/concrete-beach-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Concrete Beach"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Concrete Beach</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: 1200 / 1500; max-width: calc(75vh * 1200 / 1500)">
-            <div class="vid" style="aspect-ratio: 1200 / 1500"><video src="/assets/video/vending-machine.mp4" poster="/assets/img/vending-machine-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Vending Machine"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video">
+            <div class="vid"><video src="/assets/video/vending-machine.mp4" poster="/assets/img/vending-machine-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Vending Machine"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Vending Machine</h2>
           </div>
         </div>
-          </div>
-        </section>
-      </div>
-      <section class="carousel view-carousel" aria-label="All visuals">
+      </section>
+      <section class="carousel view-carousel" aria-label="Animations">
         <ul class="carousel-track">
           <li class="slide">
-            <div class="slide-media"><a href="/designs-grid-de-sac"><img src="/assets/img/grid-de-sac.webp" alt="Grid-de-Sac" loading="lazy" /></a></div>
-            <p class="slide-caption"><span class="slide-kind">Graphics</span> <a href="/designs-grid-de-sac">Grid-de-Sac</a></p>
-          </li>
-          <li class="slide">
-            <div class="slide-media"><a href="/designs-chezkim"><img src="/assets/img/chez-kim.webp" alt="Chez Kim" loading="lazy" /></a></div>
-            <p class="slide-caption"><span class="slide-kind">Graphics</span> <a href="/designs-chezkim">Chez Kim</a></p>
-          </li>
-          <li class="slide">
-            <div class="slide-media"><a href="/designs-publicspace"><img src="/assets/img/public-space.webp" alt="Digital collage of a public plaza inspired by Cité Radieuse" loading="lazy" /></a></div>
-            <p class="slide-caption"><span class="slide-kind">Graphics</span> <a href="/designs-publicspace">Assembly at Radiant Square</a></p>
-          </li>
-          <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1920 / 1080"><video src="/assets/video/harmless-guests.mp4" poster="/assets/img/harmless-guests-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Harmless Guests"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Harmless Guests</p>
+            <p class="slide-caption">Harmless Guests</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1080 / 1440"><video src="/assets/video/nested-gloves.mp4" poster="/assets/img/nested-gloves-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Nested Gloves in Scaffolding"></video></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Nested Gloves in Scaffolding</p>
+            <p class="slide-caption">Nested Gloves in Scaffolding</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1080 / 1350"><video src="/assets/video/puppet-karate.mp4" poster="/assets/img/puppet-karate-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Puppet Karate"></video></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Puppet Karate</p>
+            <p class="slide-caption">Puppet Karate</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1280 / 720"><video src="/assets/video/paint-strokes.mp4" poster="/assets/img/paint-strokes-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Performance by the [Paint] Strokes"></video></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Performance by the [Paint] Strokes</p>
+            <p class="slide-caption">Performance by the [Paint] Strokes</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/le-train.mp4" poster="/assets/img/le-train-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Le Train"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Le Train</p>
+            <p class="slide-caption">Le Train</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/concrete-beach.mp4" poster="/assets/img/concrete-beach-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Concrete Beach"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Concrete Beach</p>
+            <p class="slide-caption">Concrete Beach</p>
           </li>
           <li class="slide">
             <div class="slide-media"><div class="vid" style="aspect-ratio: 1200 / 1500"><video src="/assets/video/vending-machine.mp4" poster="/assets/img/vending-machine-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Vending Machine"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
-            <p class="slide-caption"><span class="slide-kind">Animations</span> Vending Machine</p>
+            <p class="slide-caption">Vending Machine</p>
           </li>
         </ul>
         <div class="carousel-controls">
@@ -183,7 +138,7 @@
           function setView(v) {
             root.setAttribute('data-view', v);
             btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === v); });
-            try { localStorage.setItem('visuals-view', v); } catch (e) {}
+            try { localStorage.setItem('gallery-view', v); } catch (e) {}
           }
           function show() {
             count.textContent = (cur + 1) + ' / ' + slides.length;
@@ -208,7 +163,7 @@
             if (e.key === 'ArrowRight') go(cur + 1);
           });
           var saved = null;
-          try { saved = localStorage.getItem('visuals-view'); } catch (e) {}
+          try { saved = localStorage.getItem('gallery-view'); } catch (e) {}
           setView(saved === 'carousel' ? 'carousel' : 'list');
           show();
         })();

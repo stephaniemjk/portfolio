@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '18'
+CSSV = '19'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -21,7 +21,8 @@ SHOW_FILM_WRITING = False
 
 NAV = [
     ('/', 'About', 'about'),
-    ('/visuals', 'Visuals', 'visuals'),
+    ('/graphics', 'Graphics', 'graphics'),
+    ('/animations', 'Animations', 'animations'),
     ('/interactive', 'Interactive Web', 'interactive'),
 ] + ([('/film-writing', 'Film Writing', 'film')] if SHOW_FILM_WRITING else [])
 DESC = ("Stephanie M. Kim: illustration, animation, interactive web and film writing from New York."
@@ -83,19 +84,20 @@ def tile(href, img, alt, title, sub=None, badge=None):
         </a>'''
 
 
-def video_media(slug, title, w, h, sound):
-    """A self-hosted looping video shown like a plain asset (files in assets/video/)."""
+def video_media(slug, title, w, h, sound, shaped=False):
+    """A self-hosted looping video shown like a plain asset (files in assets/video/).
+    shaped=True keeps the video's own shape (carousel); otherwise it fills a standard tile."""
     btn = '<button type="button" class="vid-sound" aria-pressed="false">Sound on</button>' if sound else ''
-    return (f'<div class="vid" style="aspect-ratio: {w} / {h}">'
+    style = f' style="aspect-ratio: {w} / {h}"' if shaped else ''
+    return (f'<div class="vid"{style}>'
             f'<video src="/assets/video/{slug}.mp4" poster="/assets/img/{slug}-poster.webp" '
             f'autoplay muted loop playsinline preload="metadata" aria-label="{title}"></video>'
             f'{btn}</div>')
 
 
 def video(slug, title, w, h, sound):
-    # Portrait videos are capped at 75% of the screen height so they don't run a page long.
     return f'''        <div class="gallery-tile">
-          <div class="tile-media video" style="aspect-ratio: {w} / {h}; max-width: calc(75vh * {w} / {h})">
+          <div class="tile-media video">
             {video_media(slug, title, w, h, sound)}
           </div>
           <div class="tile-text">
@@ -167,40 +169,26 @@ FILES = {}
 
 FILES['index.html'] = page(None, 'about', '\n      ' + read('about.html'))
 
-VISUAL_GROUPS = ('Graphics', 'Animations')
-
 graphics = '\n'.join(
     tile('/' + slug, f'/assets/img/{img}-thumb.webp', alt, title)
     for slug, title, _, img, alt, _, _ in DESIGNS)
 animations = '\n'.join(video(*v) for v in VIDEOS)
 
 
-def visuals_col(name, tiles):
-    return f'''        <section class="visuals-col" aria-labelledby="col-{name.lower()}">
-          <h2 class="col-head" id="col-{name.lower()}">{name}</h2>
-          <div class="stack">
-{tiles}
-          </div>
-        </section>'''
-
-
-# Carousel view: every piece in one row, graphics first, then animations.
-def slide(kind, media, title, href=None):
+# Carousel view: one piece at a time, uncropped.
+def slide(media, title, href=None):
     t = f'<a href="{href}">{title}</a>' if href else title
     return f'''          <li class="slide">
             <div class="slide-media">{media}</div>
-            <p class="slide-caption"><span class="slide-kind">{kind}</span> {t}</p>
+            <p class="slide-caption">{t}</p>
           </li>'''
 
 
-slides = [slide(VISUAL_GROUPS[0],
-                f'<a href="/{slug}"><img src="/assets/img/{img}.webp" alt="{alt}" loading="lazy" /></a>',
-                title, '/' + slug)
-          for slug, title, _, img, alt, _, _ in DESIGNS]
-slides += [slide(VISUAL_GROUPS[1],
-                 video_media(slug, t, w, h, snd),
-                 t)
-           for slug, t, w, h, snd in VIDEOS]
+graphic_slides = [slide(f'<a href="/{slug}"><img src="/assets/img/{img}.webp" alt="{alt}" loading="lazy" /></a>',
+                        title, '/' + slug)
+                  for slug, title, _, img, alt, _, _ in DESIGNS]
+animation_slides = [slide(video_media(slug, t, w, h, snd, shaped=True), t)
+                    for slug, t, w, h, snd in VIDEOS]
 
 VIEW_SCRIPT = '''
       <script>
@@ -216,7 +204,7 @@ VIEW_SCRIPT = '''
           function setView(v) {
             root.setAttribute('data-view', v);
             btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === v); });
-            try { localStorage.setItem('visuals-view', v); } catch (e) {}
+            try { localStorage.setItem('gallery-view', v); } catch (e) {}
           }
           function show() {
             count.textContent = (cur + 1) + ' / ' + slides.length;
@@ -241,7 +229,7 @@ VIEW_SCRIPT = '''
             if (e.key === 'ArrowRight') go(cur + 1);
           });
           var saved = null;
-          try { saved = localStorage.getItem('visuals-view'); } catch (e) {}
+          try { saved = localStorage.getItem('gallery-view'); } catch (e) {}
           setView(saved === 'carousel' ? 'carousel' : 'list');
           show();
         })();
@@ -273,16 +261,17 @@ VIDEO_SCRIPT = '''
         })();
       </script>'''
 
-FILES['visuals.html'] = page('Visuals', 'visuals', f'''
+def gallery_page(title, key, tiles, slides, scripts=''):
+    """A gallery with a List (uniform tile grid) / Carousel toggle."""
+    return page(title, key, f'''
       <div class="view-toggle" role="group" aria-label="View">
         <button type="button" data-view="list" aria-pressed="true">List</button>
         <button type="button" data-view="carousel" aria-pressed="false">Carousel</button>
       </div>
-      <div class="visuals-cols view-list">
-{visuals_col(VISUAL_GROUPS[0], graphics)}
-{visuals_col(VISUAL_GROUPS[1], animations)}
-      </div>
-      <section class="carousel view-carousel" aria-label="All visuals">
+      <section class="gallery-grid view-list" aria-label="{title}">
+{tiles}
+      </section>
+      <section class="carousel view-carousel" aria-label="{title}">
         <ul class="carousel-track">
 {chr(10).join(slides)}
         </ul>
@@ -291,7 +280,11 @@ FILES['visuals.html'] = page('Visuals', 'visuals', f'''
           <span class="carousel-count" aria-live="polite"></span>
           <button type="button" class="carousel-next" aria-label="Next">→</button>
         </div>
-      </section>{VIEW_SCRIPT}{VIDEO_SCRIPT}''')
+      </section>{VIEW_SCRIPT}{scripts}''')
+
+
+FILES['graphics.html'] = gallery_page('Graphics', 'graphics', graphics, graphic_slides)
+FILES['animations.html'] = gallery_page('Animations', 'animations', animations, animation_slides, VIDEO_SCRIPT)
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
       <section class="gallery-grid" aria-label="Interactive web projects">
@@ -300,17 +293,17 @@ FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
            'An interactive folk tale experience.') + '\n      </section>')
 
 for slug, title, frag, img, alt, w, h in DESIGNS:
-    FILES[slug + '.html'] = page(title, 'visuals', f'''
+    FILES[slug + '.html'] = page(title, 'graphics', f'''
       <article class="detail">
         <div>
-          <p class="kicker">{VISUAL_GROUPS[0]}</p>
+          <p class="kicker">Graphics</p>
           <h2>{title}</h2>
         </div>
         <img class="detail-image" src="/assets/img/{img}.webp" alt="{alt}" width="{w}" height="{h}" />
         <div class="detail-text">
           {read('designs', frag + '.html')}
         </div>
-        <a class="back-link" href="/visuals">← Back to Visuals</a>
+        <a class="back-link" href="/graphics">← Back to Graphics</a>
       </article>''')
 
 

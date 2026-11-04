@@ -204,37 +204,6 @@ a.gallery-tile:focus-visible h2 {
     color: var(--muted);
 }
 
-/* Visuals: two columns, each a stack of tiles */
-
-.visuals-cols {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 48px;
-    align-items: start;
-}
-
-.visuals-col {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-}
-
-.visuals-col .col-head {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.visuals-col .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
 /* Videos: self-hosted, shown as plain looping assets */
 
 .vid {
@@ -248,6 +217,10 @@ a.gallery-tile:focus-visible h2 {
     width: 100%;
     height: 100%;
     display: block;
+    object-fit: cover;
+}
+
+.slide-media .vid video {
     object-fit: contain;
 }
 
@@ -279,7 +252,7 @@ a.gallery-tile:focus-visible h2 {
     text-underline-offset: 4px;
 }
 
-/* Visuals: list / carousel toggle */
+/* Galleries: list / carousel toggle */
 
 .view-toggle {
     display: none;
@@ -376,14 +349,6 @@ a.gallery-tile:focus-visible h2 {
 .slide-caption a:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
-}
-
-.slide-kind {
-    margin-right: 12px;
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
 }
 
 .carousel-controls {
@@ -537,6 +502,10 @@ cite {
 /* Phone */
 
 @media (max-width: 760px) {
+    .slide-media {
+        height: min(100vw, 62vh);
+    }
+
     .page {
         padding-top: 28px;
         gap: 28px;
@@ -564,10 +533,6 @@ cite {
         max-width: 260px;
     }
 
-    .visuals-cols {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {

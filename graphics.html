@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graphics | Stephanie M. Kim</title>
+    <meta name="description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:title" content="Graphics | Stephanie M. Kim" />
+    <meta property="og:description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
+    <link rel="stylesheet" href="/style.css?v=19" />
+    <script>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <h1><a href="/">Stephanie M. Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a class="is-active" aria-current="page" href="/graphics">Graphics</a>
+        <a href="/animations">Animations</a>
+        <a href="/interactive">Interactive Web</a>
+        </nav>
+      </header>
+
+      <div class="view-toggle" role="group" aria-label="View">
+        <button type="button" data-view="list" aria-pressed="true">List</button>
+        <button type="button" data-view="carousel" aria-pressed="false">Carousel</button>
+      </div>
+      <section class="gallery-grid view-list" aria-label="Graphics">
+        <a class="gallery-tile" href="/designs-grid-de-sac">
+          <div class="tile-media">
+            <img src="/assets/img/grid-de-sac-thumb.webp" alt="Grid-de-Sac" loading="lazy" />
+          </div>
+          <div class="tile-text">
+            <h2>Grid-de-Sac</h2>
+          </div>
+        </a>
+        <a class="gallery-tile" href="/designs-chezkim">
+          <div class="tile-media">
+            <img src="/assets/img/chez-kim-thumb.webp" alt="Chez Kim" loading="lazy" />
+          </div>
+          <div class="tile-text">
+            <h2>Chez Kim</h2>
+          </div>
+        </a>
+        <a class="gallery-tile" href="/designs-publicspace">
+          <div class="tile-media">
+            <img src="/assets/img/public-space-thumb.webp" alt="Digital collage of a public plaza inspired by Cité Radieuse" loading="lazy" />
+          </div>
+          <div class="tile-text">
+            <h2>Assembly at Radiant Square</h2>
+          </div>
+        </a>
+      </section>
+      <section class="carousel view-carousel" aria-label="Graphics">
+        <ul class="carousel-track">
+          <li class="slide">
+            <div class="slide-media"><a href="/designs-grid-de-sac"><img src="/assets/img/grid-de-sac.webp" alt="Grid-de-Sac" loading="lazy" /></a></div>
+            <p class="slide-caption"><a href="/designs-grid-de-sac">Grid-de-Sac</a></p>
+          </li>
+          <li class="slide">
+            <div class="slide-media"><a href="/designs-chezkim"><img src="/assets/img/chez-kim.webp" alt="Chez Kim" loading="lazy" /></a></div>
+            <p class="slide-caption"><a href="/designs-chezkim">Chez Kim</a></p>
+          </li>
+          <li class="slide">
+            <div class="slide-media"><a href="/designs-publicspace"><img src="/assets/img/public-space.webp" alt="Digital collage of a public plaza inspired by Cité Radieuse" loading="lazy" /></a></div>
+            <p class="slide-caption"><a href="/designs-publicspace">Assembly at Radiant Square</a></p>
+          </li>
+        </ul>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-prev" aria-label="Previous">←</button>
+          <span class="carousel-count" aria-live="polite"></span>
+          <button type="button" class="carousel-next" aria-label="Next">→</button>
+        </div>
+      </section>
+      <script>
+        (function () {
+          var root = document.documentElement;
+          var btns = document.querySelectorAll('.view-toggle button');
+          var track = document.querySelector('.carousel-track');
+          var slides = track.querySelectorAll('.slide');
+          var count = document.querySelector('.carousel-count');
+          var prev = document.querySelector('.carousel-prev');
+          var next = document.querySelector('.carousel-next');
+          var cur = 0;
+          function setView(v) {
+            root.setAttribute('data-view', v);
+            btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.view === v); });
+            try { localStorage.setItem('gallery-view', v); } catch (e) {}
+          }
+          function show() {
+            count.textContent = (cur + 1) + ' / ' + slides.length;
+            prev.disabled = cur === 0;
+            next.disabled = cur === slides.length - 1;
+          }
+          function go(i) {
+            cur = Math.max(0, Math.min(slides.length - 1, i));
+            track.scrollTo({ left: slides[cur].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+            show();
+          }
+          btns.forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.view); }); });
+          prev.addEventListener('click', function () { go(cur - 1); });
+          next.addEventListener('click', function () { go(cur + 1); });
+          track.addEventListener('scroll', function () {
+            var i = Math.round(track.scrollLeft / track.clientWidth);
+            if (i !== cur) { cur = i; show(); }
+          }, { passive: true });
+          document.addEventListener('keydown', function (e) {
+            if (root.getAttribute('data-view') !== 'carousel') return;
+            if (e.key === 'ArrowLeft') go(cur - 1);
+            if (e.key === 'ArrowRight') go(cur + 1);
+          });
+          var saved = null;
+          try { saved = localStorage.getItem('gallery-view'); } catch (e) {}
+          setView(saved === 'carousel' ? 'carousel' : 'list');
+          show();
+        })();
+      </script>
+    </main>
+  </body>
+</html>
