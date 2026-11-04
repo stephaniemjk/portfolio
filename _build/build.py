@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '16'
+CSSV = '17'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -83,20 +83,19 @@ def tile(href, img, alt, title, sub=None, badge=None):
         </a>'''
 
 
-def yt_media(yt_id, title):
-    """A YouTube video shown like a plain looping asset: no controls, no YouTube
-    chrome. A still covers the player until it is actually playing."""
-    return (f'<div class="yt" data-yt="{yt_id}" data-title="{title}">'
-            f'<img class="yt-poster" src="https://i.ytimg.com/vi/{yt_id}/maxresdefault.jpg" alt="" loading="lazy" />'
-            f'<div class="yt-frame"></div>'
-            f'<button type="button" class="yt-sound" aria-pressed="false">Sound on</button>'
+def video_media(slug, title, w, h):
+    """A self-hosted looping video shown like a plain asset (files in assets/video/)."""
+    return (f'<div class="vid" style="aspect-ratio: {w} / {h}">'
+            f'<video src="/assets/video/{slug}.mp4" poster="/assets/img/{slug}-poster.webp" '
+            f'autoplay muted loop playsinline preload="metadata" aria-label="{title}"></video>'
+            f'<button type="button" class="vid-sound" aria-pressed="false">Sound on</button>'
             f'</div>')
 
 
-def video(yt_id, title):
+def video(slug, title, w, h):
     return f'''        <div class="gallery-tile">
-          <div class="tile-media video">
-            {yt_media(yt_id, title)}
+          <div class="tile-media video" style="aspect-ratio: {w} / {h}">
+            {video_media(slug, title, w, h)}
           </div>
           <div class="tile-text">
             <h2>{title}</h2>
@@ -115,8 +114,9 @@ DESIGNS = [
 ]
 
 VIDEOS = [
-    ('oGl9cEbhAxA', 'Harmless Guests'),
-    ('mzmz8qlgKCY', 'Le Train'),
+    # file slug (assets/video/<slug>.mp4, assets/img/<slug>-poster.webp), title, width, height
+    ('harmless-guests', 'Harmless Guests', 1920, 1080),
+    ('le-train', 'Le Train', 1600, 1200),
 ]
 
 LETTERBOXD = 'https://letterboxd.com/saucygarlicbaby/'
@@ -165,7 +165,7 @@ VISUAL_GROUPS = ('Graphics', 'Animations')
 graphics = '\n'.join(
     tile('/' + slug, f'/assets/img/{img}-thumb.webp', alt, title)
     for slug, title, _, img, alt, _, _ in DESIGNS)
-animations = '\n'.join(video(i, t) for i, t in VIDEOS)
+animations = '\n'.join(video(*v) for v in VIDEOS)
 
 
 def visuals_col(name, tiles):
@@ -191,9 +191,9 @@ slides = [slide(VISUAL_GROUPS[0],
                 title, '/' + slug)
           for slug, title, _, img, alt, _, _ in DESIGNS]
 slides += [slide(VISUAL_GROUPS[1],
-                 yt_media(i, t),
+                 video_media(slug, t, w, h),
                  t)
-           for i, t in VIDEOS]
+           for slug, t, w, h in VIDEOS]
 
 VIEW_SCRIPT = '''
       <script>
@@ -240,68 +240,28 @@ VIEW_SCRIPT = '''
         })();
       </script>'''
 
-YT_SCRIPT = '''
+VIDEO_SCRIPT = '''
       <script>
         (function () {
-          var boxes = [].slice.call(document.querySelectorAll('.yt'));
-          if (!boxes.length || !('IntersectionObserver' in window)) return;
-          var ready = false, waiting = [];
-          function make(box) {
-            if (box._player) return;
-            if (!ready) { if (waiting.indexOf(box) < 0) waiting.push(box); return; }
-            var id = box.dataset.yt;
-            box._player = new YT.Player(box.querySelector('.yt-frame'), {
-              videoId: id,
-              host: 'https://www.youtube-nocookie.com',
-              playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: id, playsinline: 1,
-                            rel: 0, modestbranding: 1, iv_load_policy: 3, disablekb: 1, fs: 0 },
-              events: {
-                onReady: function (e) {
-                  e.target.getIframe().setAttribute('title', box.dataset.title);
-                  e.target.mute();
-                  if (box._visible) e.target.playVideo();
-                },
-                onStateChange: function (e) {
-                  if (e.data === 1 && !box._shown) {
-                    box._shown = true;
-                    setTimeout(function () { box.classList.add('playing'); }, 2500);
-                  }
-                }
-              }
-            });
-          }
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (en) {
-              var box = en.target;
-              box._visible = en.isIntersecting;
-              if (en.isIntersecting) { make(box); }
-              var p = box._player;
-              if (p && p.playVideo) { en.isIntersecting ? p.playVideo() : p.pauseVideo(); }
-            });
-          }, { threshold: 0.25 });
+          var boxes = [].slice.call(document.querySelectorAll('.vid'));
           boxes.forEach(function (box) {
-            var img = box.querySelector('.yt-poster');
-            function fallback() {
-              if (img.src.indexOf('maxresdefault') > -1) img.src = img.src.replace('maxresdefault', 'hqdefault');
-            }
-            img.addEventListener('error', fallback);
-            img.addEventListener('load', function () { if (img.naturalWidth <= 120) fallback(); });
-            io.observe(box);
-            var b = box.querySelector('.yt-sound');
+            var v = box.querySelector('video'), b = box.querySelector('.vid-sound');
             b.addEventListener('click', function () {
-              var p = box._player;
-              if (!p || !p.isMuted) return;
-              if (p.isMuted()) { p.unMute(); b.textContent = 'Sound off'; b.setAttribute('aria-pressed', 'true'); }
-              else { p.mute(); b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'false'); }
+              v.muted = !v.muted;
+              b.textContent = v.muted ? 'Sound on' : 'Sound off';
+              b.setAttribute('aria-pressed', String(!v.muted));
+              if (v.paused) v.play();
             });
           });
-          window.onYouTubeIframeAPIReady = function () {
-            ready = true;
-            waiting.splice(0).forEach(make);
-          };
-          var s = document.createElement('script');
-          s.src = 'https://www.youtube.com/iframe_api';
-          document.head.appendChild(s);
+          if (!('IntersectionObserver' in window)) return;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var v = en.target;
+              if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+              else v.pause();
+            });
+          }, { threshold: 0.25 });
+          boxes.forEach(function (box) { io.observe(box.querySelector('video')); });
         })();
       </script>'''
 
@@ -323,7 +283,7 @@ FILES['visuals.html'] = page('Visuals', 'visuals', f'''
           <span class="carousel-count" aria-live="polite"></span>
           <button type="button" class="carousel-next" aria-label="Next">→</button>
         </div>
-      </section>{VIEW_SCRIPT}{YT_SCRIPT}''')
+      </section>{VIEW_SCRIPT}{VIDEO_SCRIPT}''')
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
       <section class="gallery-grid" aria-label="Interactive web projects">

@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
-    <link rel="stylesheet" href="/style.css?v=16" />
+    <link rel="stylesheet" href="/style.css?v=17" />
     <script>document.documentElement.classList.add('js');</script>
   </head>
   <body>
@@ -63,16 +63,16 @@
           <h2 class="col-head" id="col-animations">Animations</h2>
           <div class="stack">
         <div class="gallery-tile">
-          <div class="tile-media video">
-            <div class="yt" data-yt="oGl9cEbhAxA" data-title="Harmless Guests"><img class="yt-poster" src="https://i.ytimg.com/vi/oGl9cEbhAxA/maxresdefault.jpg" alt="" loading="lazy" /><div class="yt-frame"></div><button type="button" class="yt-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video" style="aspect-ratio: 1920 / 1080">
+            <div class="vid" style="aspect-ratio: 1920 / 1080"><video src="/assets/video/harmless-guests.mp4" poster="/assets/img/harmless-guests-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Harmless Guests"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Harmless Guests</h2>
           </div>
         </div>
         <div class="gallery-tile">
-          <div class="tile-media video">
-            <div class="yt" data-yt="mzmz8qlgKCY" data-title="Le Train"><img class="yt-poster" src="https://i.ytimg.com/vi/mzmz8qlgKCY/maxresdefault.jpg" alt="" loading="lazy" /><div class="yt-frame"></div><button type="button" class="yt-sound" aria-pressed="false">Sound on</button></div>
+          <div class="tile-media video" style="aspect-ratio: 1600 / 1200">
+            <div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/le-train.mp4" poster="/assets/img/le-train-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Le Train"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
           </div>
           <div class="tile-text">
             <h2>Le Train</h2>
@@ -96,11 +96,11 @@
             <p class="slide-caption"><span class="slide-kind">Graphics</span> <a href="/designs-publicspace">Assembly at Radiant Square</a></p>
           </li>
           <li class="slide">
-            <div class="slide-media"><div class="yt" data-yt="oGl9cEbhAxA" data-title="Harmless Guests"><img class="yt-poster" src="https://i.ytimg.com/vi/oGl9cEbhAxA/maxresdefault.jpg" alt="" loading="lazy" /><div class="yt-frame"></div><button type="button" class="yt-sound" aria-pressed="false">Sound on</button></div></div>
+            <div class="slide-media"><div class="vid" style="aspect-ratio: 1920 / 1080"><video src="/assets/video/harmless-guests.mp4" poster="/assets/img/harmless-guests-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Harmless Guests"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
             <p class="slide-caption"><span class="slide-kind">Animations</span> Harmless Guests</p>
           </li>
           <li class="slide">
-            <div class="slide-media"><div class="yt" data-yt="mzmz8qlgKCY" data-title="Le Train"><img class="yt-poster" src="https://i.ytimg.com/vi/mzmz8qlgKCY/maxresdefault.jpg" alt="" loading="lazy" /><div class="yt-frame"></div><button type="button" class="yt-sound" aria-pressed="false">Sound on</button></div></div>
+            <div class="slide-media"><div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/le-train.mp4" poster="/assets/img/le-train-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Le Train"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div></div>
             <p class="slide-caption"><span class="slide-kind">Animations</span> Le Train</p>
           </li>
         </ul>
@@ -155,65 +155,25 @@
       </script>
       <script>
         (function () {
-          var boxes = [].slice.call(document.querySelectorAll('.yt'));
-          if (!boxes.length || !('IntersectionObserver' in window)) return;
-          var ready = false, waiting = [];
-          function make(box) {
-            if (box._player) return;
-            if (!ready) { if (waiting.indexOf(box) < 0) waiting.push(box); return; }
-            var id = box.dataset.yt;
-            box._player = new YT.Player(box.querySelector('.yt-frame'), {
-              videoId: id,
-              host: 'https://www.youtube-nocookie.com',
-              playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: id, playsinline: 1,
-                            rel: 0, modestbranding: 1, iv_load_policy: 3, disablekb: 1, fs: 0 },
-              events: {
-                onReady: function (e) {
-                  e.target.getIframe().setAttribute('title', box.dataset.title);
-                  e.target.mute();
-                  if (box._visible) e.target.playVideo();
-                },
-                onStateChange: function (e) {
-                  if (e.data === 1 && !box._shown) {
-                    box._shown = true;
-                    setTimeout(function () { box.classList.add('playing'); }, 2500);
-                  }
-                }
-              }
-            });
-          }
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (en) {
-              var box = en.target;
-              box._visible = en.isIntersecting;
-              if (en.isIntersecting) { make(box); }
-              var p = box._player;
-              if (p && p.playVideo) { en.isIntersecting ? p.playVideo() : p.pauseVideo(); }
-            });
-          }, { threshold: 0.25 });
+          var boxes = [].slice.call(document.querySelectorAll('.vid'));
           boxes.forEach(function (box) {
-            var img = box.querySelector('.yt-poster');
-            function fallback() {
-              if (img.src.indexOf('maxresdefault') > -1) img.src = img.src.replace('maxresdefault', 'hqdefault');
-            }
-            img.addEventListener('error', fallback);
-            img.addEventListener('load', function () { if (img.naturalWidth <= 120) fallback(); });
-            io.observe(box);
-            var b = box.querySelector('.yt-sound');
+            var v = box.querySelector('video'), b = box.querySelector('.vid-sound');
             b.addEventListener('click', function () {
-              var p = box._player;
-              if (!p || !p.isMuted) return;
-              if (p.isMuted()) { p.unMute(); b.textContent = 'Sound off'; b.setAttribute('aria-pressed', 'true'); }
-              else { p.mute(); b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'false'); }
+              v.muted = !v.muted;
+              b.textContent = v.muted ? 'Sound on' : 'Sound off';
+              b.setAttribute('aria-pressed', String(!v.muted));
+              if (v.paused) v.play();
             });
           });
-          window.onYouTubeIframeAPIReady = function () {
-            ready = true;
-            waiting.splice(0).forEach(make);
-          };
-          var s = document.createElement('script');
-          s.src = 'https://www.youtube.com/iframe_api';
-          document.head.appendChild(s);
+          if (!('IntersectionObserver' in window)) return;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var v = en.target;
+              if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+              else v.pause();
+            });
+          }, { threshold: 0.25 });
+          boxes.forEach(function (box) { io.observe(box.querySelector('video')); });
         })();
       </script>
     </main>
