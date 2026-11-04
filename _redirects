@@ -8,3 +8,8 @@
 /film-writing-barcelona                /film-writing  301
 /film-writing-elevator-to-the-gallows  /film-writing  301
 /film-writing-the-cousins              /film-writing  301
+# Film Writing hidden (302 so it can come back without browsers remembering the redirect)
+/film-writing                          /  302
+/film-writing-the-lovers               /  302
+/film-writing-vivre-sa-vie             /  302
+/film-writing-masculin-feminin         /  302

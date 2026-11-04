@@ -13,15 +13,20 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '12'
+CSSV = '13'
+
+# Film Writing is hidden for now. To bring it back: set this to True,
+# delete the "Film Writing hidden" lines in _redirects, and rebuild.
+SHOW_FILM_WRITING = False
 
 NAV = [
     ('/', 'About', 'about'),
     ('/visuals', 'Visuals', 'visuals'),
     ('/interactive', 'Interactive Web', 'interactive'),
-    ('/film-writing', 'Film Writing', 'film'),
-]
-DESC = "Stephanie M. Kim: illustration, animation, interactive web and film writing from New York."
+] + ([('/film-writing', 'Film Writing', 'film')] if SHOW_FILM_WRITING else [])
+DESC = ("Stephanie M. Kim: illustration, animation, interactive web and film writing from New York."
+        if SHOW_FILM_WRITING else
+        "Stephanie M. Kim: illustration, animation and interactive web from New York.")
 
 
 def read(*parts):
@@ -203,7 +208,7 @@ def review_item(r, show_director):
 
 
 sections = []
-for group, show_director, reviews in REVIEW_GROUPS:
+for group, show_director, reviews in (REVIEW_GROUPS if SHOW_FILM_WRITING else []):
     if not reviews:
         continue
     for r in reviews:
@@ -231,7 +236,8 @@ for group, show_director, reviews in REVIEW_GROUPS:
           </ul>
         </div>''')
 
-FILES['film-writing.html'] = page('Film Writing', 'film', f'''
+if SHOW_FILM_WRITING:
+  FILES['film-writing.html'] = page('Film Writing', 'film', f'''
       <section class="writing">
 {chr(10).join(sections)}
         <p class="source">More on <a href="{LETTERBOXD}">Letterboxd</a></p>
