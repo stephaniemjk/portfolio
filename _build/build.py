@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '15'
+CSSV = '16'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -83,10 +83,20 @@ def tile(href, img, alt, title, sub=None, badge=None):
         </a>'''
 
 
+def yt_media(yt_id, title):
+    """A YouTube video shown like a plain looping asset: no controls, no YouTube
+    chrome. A still covers the player until it is actually playing."""
+    return (f'<div class="yt" data-yt="{yt_id}" data-title="{title}">'
+            f'<img class="yt-poster" src="https://i.ytimg.com/vi/{yt_id}/maxresdefault.jpg" alt="" loading="lazy" />'
+            f'<div class="yt-frame"></div>'
+            f'<button type="button" class="yt-sound" aria-pressed="false">Sound on</button>'
+            f'</div>')
+
+
 def video(yt_id, title):
     return f'''        <div class="gallery-tile">
           <div class="tile-media video">
-            <iframe src="https://www.youtube-nocookie.com/embed/{yt_id}" title="{title}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {yt_media(yt_id, title)}
           </div>
           <div class="tile-text">
             <h2>{title}</h2>
@@ -181,7 +191,7 @@ slides = [slide(VISUAL_GROUPS[0],
                 title, '/' + slug)
           for slug, title, _, img, alt, _, _ in DESIGNS]
 slides += [slide(VISUAL_GROUPS[1],
-                 f'<iframe src="https://www.youtube-nocookie.com/embed/{i}" title="{t}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+                 yt_media(i, t),
                  t)
            for i, t in VIDEOS]
 
@@ -230,6 +240,71 @@ VIEW_SCRIPT = '''
         })();
       </script>'''
 
+YT_SCRIPT = '''
+      <script>
+        (function () {
+          var boxes = [].slice.call(document.querySelectorAll('.yt'));
+          if (!boxes.length || !('IntersectionObserver' in window)) return;
+          var ready = false, waiting = [];
+          function make(box) {
+            if (box._player) return;
+            if (!ready) { if (waiting.indexOf(box) < 0) waiting.push(box); return; }
+            var id = box.dataset.yt;
+            box._player = new YT.Player(box.querySelector('.yt-frame'), {
+              videoId: id,
+              host: 'https://www.youtube-nocookie.com',
+              playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: id, playsinline: 1,
+                            rel: 0, modestbranding: 1, iv_load_policy: 3, disablekb: 1, fs: 0 },
+              events: {
+                onReady: function (e) {
+                  e.target.getIframe().setAttribute('title', box.dataset.title);
+                  e.target.mute();
+                  if (box._visible) e.target.playVideo();
+                },
+                onStateChange: function (e) {
+                  if (e.data === 1 && !box._shown) {
+                    box._shown = true;
+                    setTimeout(function () { box.classList.add('playing'); }, 2500);
+                  }
+                }
+              }
+            });
+          }
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var box = en.target;
+              box._visible = en.isIntersecting;
+              if (en.isIntersecting) { make(box); }
+              var p = box._player;
+              if (p && p.playVideo) { en.isIntersecting ? p.playVideo() : p.pauseVideo(); }
+            });
+          }, { threshold: 0.25 });
+          boxes.forEach(function (box) {
+            var img = box.querySelector('.yt-poster');
+            function fallback() {
+              if (img.src.indexOf('maxresdefault') > -1) img.src = img.src.replace('maxresdefault', 'hqdefault');
+            }
+            img.addEventListener('error', fallback);
+            img.addEventListener('load', function () { if (img.naturalWidth <= 120) fallback(); });
+            io.observe(box);
+            var b = box.querySelector('.yt-sound');
+            b.addEventListener('click', function () {
+              var p = box._player;
+              if (!p || !p.isMuted) return;
+              if (p.isMuted()) { p.unMute(); b.textContent = 'Sound off'; b.setAttribute('aria-pressed', 'true'); }
+              else { p.mute(); b.textContent = 'Sound on'; b.setAttribute('aria-pressed', 'false'); }
+            });
+          });
+          window.onYouTubeIframeAPIReady = function () {
+            ready = true;
+            waiting.splice(0).forEach(make);
+          };
+          var s = document.createElement('script');
+          s.src = 'https://www.youtube.com/iframe_api';
+          document.head.appendChild(s);
+        })();
+      </script>'''
+
 FILES['visuals.html'] = page('Visuals', 'visuals', f'''
       <div class="view-toggle" role="group" aria-label="View">
         <button type="button" data-view="list" aria-pressed="true">List</button>
@@ -248,7 +323,7 @@ FILES['visuals.html'] = page('Visuals', 'visuals', f'''
           <span class="carousel-count" aria-live="polite"></span>
           <button type="button" class="carousel-next" aria-label="Next">→</button>
         </div>
-      </section>{VIEW_SCRIPT}''')
+      </section>{VIEW_SCRIPT}{YT_SCRIPT}''')
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
       <section class="gallery-grid" aria-label="Interactive web projects">
