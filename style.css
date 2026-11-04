@@ -320,7 +320,6 @@ a.gallery-tile:focus-visible h2 {
 .slide-media {
     position: relative;
     height: min(calc(min(1280px, 92vw) * 9 / 16), 62vh);
-    background: var(--media);
 }
 
 .slide-media img,
@@ -336,6 +335,7 @@ a.gallery-tile:focus-visible h2 {
 
 .slide-caption {
     margin: 0;
+    text-align: center;
     font-size: 18px;
     font-weight: 500;
     color: var(--bold);
@@ -353,6 +353,7 @@ a.gallery-tile:focus-visible h2 {
 
 .carousel-controls {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 20px;
     margin-top: 20px;
