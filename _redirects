@@ -1,7 +1,9 @@
-/designs                          /graphics      301
-/designs.html                     /graphics      301
-/visuals                          /graphics      301
-/visuals.html                     /graphics      301
+/designs                          /design        301
+/designs.html                     /design        301
+/visuals                          /design        301
+/visuals.html                     /design        301
+/graphics                         /design        301
+/graphics.html                    /design        301
 /film-writing-breathless          /film-writing  301
 /film-writing-two-english-girls   /film-writing  301
 /film-writing-last-days-of-disco       /film-writing  301

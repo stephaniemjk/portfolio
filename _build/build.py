@@ -13,7 +13,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_build')
-CSSV = '20'
+CSSV = '21'
 
 # Film Writing is hidden for now. To bring it back: set this to True,
 # delete the "Film Writing hidden" lines in _redirects, and rebuild.
@@ -21,7 +21,7 @@ SHOW_FILM_WRITING = False
 
 NAV = [
     ('/', 'About', 'about'),
-    ('/graphics', 'Graphics', 'graphics'),
+    ('/design', 'Design', 'design'),
     ('/animations', 'Animations', 'animations'),
     ('/interactive', 'Interactive Web', 'interactive'),
 ] + ([('/film-writing', 'Film Writing', 'film')] if SHOW_FILM_WRITING else [])
@@ -95,15 +95,19 @@ def video_media(slug, title, w, h, sound, shaped=False):
             f'{btn}</div>')
 
 
-def video(slug, title, w, h, sound):
-    return f'''        <div class="gallery-tile">
+SERIES = 'Part of the Industrial Beauty Series'
+
+
+def video(slug, title, w, h, sound, series):
+    sub = f'\n            <p>{SERIES}</p>' if series else ''
+    return f'''        <a class="gallery-tile" href="/animations-{slug}">
           <div class="tile-media video">
-            {video_media(slug, title, w, h, sound)}
+            {video_media(slug, title, w, h, False)}
           </div>
           <div class="tile-text">
-            <h2>{title}</h2>
+            <h2>{title}</h2>{sub}
           </div>
-        </div>'''
+        </a>'''
 
 
 # ---------- Content ----------
@@ -118,14 +122,15 @@ DESIGNS = [
 
 VIDEOS = [
     # file slug (assets/video/<slug>.mp4, assets/img/<slug>-poster.webp), title, width, height,
-    # has sound (shows the Sound on button)
-    ('harmless-guests', 'Harmless Guests', 1920, 1080, True),
-    ('nested-gloves', 'Nested Gloves in Scaffolding', 1080, 1440, False),
-    ('puppet-karate', 'Puppet Karate', 1080, 1350, False),
-    ('paint-strokes', 'Performance by the [Paint] Strokes', 1280, 720, False),
-    ('le-train', 'Le Train', 1600, 1200, True),
-    ('concrete-beach', 'Concrete Beach', 1600, 1200, True),
-    ('vending-machine', 'Vending Machine', 1200, 1500, True),
+    # has sound (shows the Sound on button), part of the Industrial Beauty Series.
+    # Page text, if any, lives in _build/animations/<slug>.html. Page URL: /animations-<slug>
+    ('harmless-guests', 'Harmless Guests', 1920, 1080, True, False),
+    ('nested-gloves', 'Nested Gloves in Scaffolding', 1080, 1440, False, False),
+    ('puppet-karate', 'Puppet Karate', 1080, 1350, False, False),
+    ('paint-strokes', 'Performance by the [Paint] Strokes', 1280, 720, False, False),
+    ('le-train', 'Le Train', 1600, 1200, True, True),
+    ('concrete-beach', 'Concrete Beach', 1600, 1200, True, True),
+    ('vending-machine', 'Vending Machine', 1200, 1500, True, True),
 ]
 
 LETTERBOXD = 'https://letterboxd.com/saucygarlicbaby/'
@@ -169,7 +174,7 @@ FILES = {}
 
 FILES['index.html'] = page(None, 'about', '\n      ' + read('about.html'))
 
-graphics = '\n'.join(
+designs = '\n'.join(
     tile('/' + slug, f'/assets/img/{img}-thumb.webp', alt, title)
     for slug, title, _, img, alt, _, _ in DESIGNS)
 animations = '\n'.join(video(*v) for v in VIDEOS)
@@ -184,11 +189,11 @@ def slide(media, title, href=None):
           </li>'''
 
 
-graphic_slides = [slide(f'<a href="/{slug}"><img src="/assets/img/{img}.webp" alt="{alt}" loading="lazy" /></a>',
+design_slides = [slide(f'<a href="/{slug}"><img src="/assets/img/{img}.webp" alt="{alt}" loading="lazy" /></a>',
                         title, '/' + slug)
                   for slug, title, _, img, alt, _, _ in DESIGNS]
-animation_slides = [slide(video_media(slug, t, w, h, snd, shaped=True), t)
-                    for slug, t, w, h, snd in VIDEOS]
+animation_slides = [slide(video_media(slug, t, w, h, snd, shaped=True), t, f'/animations-{slug}')
+                    for slug, t, w, h, snd, _ in VIDEOS]
 
 VIEW_SCRIPT = '''
       <script>
@@ -283,7 +288,7 @@ def gallery_page(title, key, tiles, slides, scripts=''):
       </section>{VIEW_SCRIPT}{scripts}''')
 
 
-FILES['graphics.html'] = gallery_page('Graphics', 'graphics', graphics, graphic_slides)
+FILES['design.html'] = gallery_page('Design', 'design', designs, design_slides)
 FILES['animations.html'] = gallery_page('Animations', 'animations', animations, animation_slides, VIDEO_SCRIPT)
 
 FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
@@ -293,18 +298,37 @@ FILES['interactive.html'] = page('Interactive Web', 'interactive', '''
            'An interactive folk tale experience.') + '\n      </section>')
 
 for slug, title, frag, img, alt, w, h in DESIGNS:
-    FILES[slug + '.html'] = page(title, 'graphics', f'''
+    FILES[slug + '.html'] = page(title, 'design', f'''
       <article class="detail">
         <div>
-          <p class="kicker">Graphics</p>
+          <p class="kicker">Design</p>
           <h2>{title}</h2>
         </div>
         <img class="detail-image" src="/assets/img/{img}.webp" alt="{alt}" width="{w}" height="{h}" />
         <div class="detail-text">
           {read('designs', frag + '.html')}
         </div>
-        <a class="back-link" href="/graphics">← Back to Graphics</a>
+        <a class="back-link" href="/design">← Back to Design</a>
       </article>''')
+
+for slug, title, w, h, sound, series in VIDEOS:
+    src = os.path.join(SRC, 'animations', slug + '.html')
+    text = f'''
+        <div class="detail-text">
+          {read('animations', slug + '.html')}
+        </div>''' if os.path.exists(src) else ''
+    sub = f'\n          <p class="series">{SERIES}</p>' if series else ''
+    FILES[f'animations-{slug}.html'] = page(title, 'animations', f'''
+      <article class="detail">
+        <div>
+          <p class="kicker">Animations</p>
+          <h2>{title}</h2>{sub}
+        </div>
+        <div class="detail-video" style="width: min(100%, calc(80vh * {w} / {h}))">
+          {video_media(slug, title, w, h, sound, shaped=True)}
+        </div>{text}
+        <a class="back-link" href="/animations">← Back to Animations</a>
+      </article>{VIDEO_SCRIPT}''')
 
 
 def paragraphs(text):

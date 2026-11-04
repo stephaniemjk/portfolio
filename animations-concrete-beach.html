@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concrete Beach | Stephanie M. Kim</title>
+    <meta name="description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:title" content="Concrete Beach | Stephanie M. Kim" />
+    <meta property="og:description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
+    <link rel="stylesheet" href="/style.css?v=21" />
+    <script>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <h1><a href="/">Stephanie M. Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a href="/design">Design</a>
+        <a class="is-active" aria-current="page" href="/animations">Animations</a>
+        <a href="/interactive">Interactive Web</a>
+        </nav>
+      </header>
+
+      <article class="detail">
+        <div>
+          <p class="kicker">Animations</p>
+          <h2>Concrete Beach</h2>
+          <p class="series">Part of the Industrial Beauty Series</p>
+        </div>
+        <div class="detail-video" style="width: min(100%, calc(80vh * 1600 / 1200))">
+          <div class="vid" style="aspect-ratio: 1600 / 1200"><video src="/assets/video/concrete-beach.mp4" poster="/assets/img/concrete-beach-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Concrete Beach"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+        </div>
+        <div class="detail-text">
+          <p>Recently, my friends and I got off at the Brighton Beach stop, and as I was making my way down the half-turn staircase, I looked over the railing and saw this gorgeous bird’s-eye view of a beach gear shop. The umbrellas and beach chairs were unevenly lined up against one another underneath this bright green banner, and the vibrant objects complemented the concrete sidewalk. I loved this shot so much because the abstract shapes and bright colors reminded me of 60s Swiss graphic design. The designers of that era possess this rigid love for sans serif fonts (Helvetica, lmao), yet there’s this playfulness in their color choices or motifs.</p>
+          <p>When you look at my original photo (below), you can recognize my usual street trash motifs like gloves and bottles. For this animation, I liked the idea of recomposing digital graphics. For most of the objects in the frame, I’ve extracted them from the original photo, then manipulated them into other objects: the side of an umbrella’s canopy turned into a beach towel, the green store sign transformed into ocean waves, and the concrete sidewalk molded into a sand house.</p>
+          <figure>
+            <img src="/assets/img/concrete-beach-photo.webp" alt="Bird’s-eye view of a beach gear shop in Brighton Beach: striped umbrellas and folding chairs on the sidewalk under a green store sign" width="1456" height="1092" loading="lazy" />
+          </figure>
+          <p>I’ll continue to explore how objects can be reassembled into novel and fun compositions. So much joy in digital collaging!</p>
+        </div>
+        <a class="back-link" href="/animations">← Back to Animations</a>
+      </article>
+      <script>
+        (function () {
+          var boxes = [].slice.call(document.querySelectorAll('.vid'));
+          boxes.forEach(function (box) {
+            var v = box.querySelector('video'), b = box.querySelector('.vid-sound');
+            if (!b) return;
+            b.addEventListener('click', function () {
+              v.muted = !v.muted;
+              b.textContent = v.muted ? 'Sound on' : 'Sound off';
+              b.setAttribute('aria-pressed', String(!v.muted));
+              if (v.paused) v.play();
+            });
+          });
+          if (!('IntersectionObserver' in window)) return;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var v = en.target;
+              if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+              else v.pause();
+            });
+          }, { threshold: 0.25 });
+          boxes.forEach(function (box) { io.observe(box.querySelector('video')); });
+        })();
+      </script>
+    </main>
+  </body>
+</html>

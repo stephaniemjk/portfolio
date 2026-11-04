@@ -412,6 +412,47 @@ a.gallery-tile:focus-visible h2 {
     margin: 0 0 1em;
 }
 
+.detail .series {
+    margin: 8px 0 0;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.detail-video .vid {
+    position: relative;
+    inset: auto;
+    width: 100%;
+}
+
+.detail-text figure {
+    margin: 1.6em 0;
+}
+
+.detail-text figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.detail-text figure.embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.detail-text figure.embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.detail-text figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
 .back-link {
     font-size: 16px;
 }

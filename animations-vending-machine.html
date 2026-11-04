@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vending Machine | Stephanie M. Kim</title>
+    <meta name="description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:title" content="Vending Machine | Stephanie M. Kim" />
+    <meta property="og:description" content="Stephanie M. Kim: illustration, animation and interactive web from New York." />
+    <meta property="og:image" content="https://stephaniemkim.com/fishermanswife/img/posters/scene-01.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" />
+    <link rel="stylesheet" href="/style.css?v=21" />
+    <script>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <h1><a href="/">Stephanie M. Kim</a></h1>
+        <nav class="nav-bar" aria-label="Primary">
+        <a href="/">About</a>
+        <a href="/design">Design</a>
+        <a class="is-active" aria-current="page" href="/animations">Animations</a>
+        <a href="/interactive">Interactive Web</a>
+        </nav>
+      </header>
+
+      <article class="detail">
+        <div>
+          <p class="kicker">Animations</p>
+          <h2>Vending Machine</h2>
+          <p class="series">Part of the Industrial Beauty Series</p>
+        </div>
+        <div class="detail-video" style="width: min(100%, calc(80vh * 1200 / 1500))">
+          <div class="vid" style="aspect-ratio: 1200 / 1500"><video src="/assets/video/vending-machine.mp4" poster="/assets/img/vending-machine-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Vending Machine"></video><button type="button" class="vid-sound" aria-pressed="false">Sound on</button></div>
+        </div>
+        <div class="detail-text">
+          <p>This piece is a culmination of a multi-year effort. I’ve been collecting pictures of random litter like gloves and beverage bottles all over New York that most people overlook, but to me, I love the idea of anthropomorphizing the glove. Even if it’s a replica of the human hand, there’s something really uncanny about the synthetic extension of it and pretending it’s able to operate on its own! For this piece, I extracted photos of gloves and beverages and scanned construction paper to compile a digital-collage version of a vending machine. You’d find this at a public park, neglected and probably next to the bathroom building.</p>
+          <p>I’m able to use the machine quite easily, but when I tried to reconstruct this vending machine, I failed to remember the simple components that are part of it. This made me think about how utilities and infrastructure are often overlooked and taken for granted.</p>
+        </div>
+        <a class="back-link" href="/animations">← Back to Animations</a>
+      </article>
+      <script>
+        (function () {
+          var boxes = [].slice.call(document.querySelectorAll('.vid'));
+          boxes.forEach(function (box) {
+            var v = box.querySelector('video'), b = box.querySelector('.vid-sound');
+            if (!b) return;
+            b.addEventListener('click', function () {
+              v.muted = !v.muted;
+              b.textContent = v.muted ? 'Sound on' : 'Sound off';
+              b.setAttribute('aria-pressed', String(!v.muted));
+              if (v.paused) v.play();
+            });
+          });
+          if (!('IntersectionObserver' in window)) return;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var v = en.target;
+              if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+              else v.pause();
+            });
+          }, { threshold: 0.25 });
+          boxes.forEach(function (box) { io.observe(box.querySelector('video')); });
+        })();
+      </script>
+    </main>
+  </body>
+</html>
