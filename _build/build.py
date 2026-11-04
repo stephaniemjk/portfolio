@@ -84,13 +84,21 @@ def tile(href, img, alt, title, sub=None, badge=None):
         </a>'''
 
 
+# Bump a video's number here when its file is replaced, so returning visitors get the new one.
+MEDIA_V = {'harmless-guests': 2, 'le-train': 2}
+
+
+def mv(slug):
+    return f'?v={MEDIA_V[slug]}' if slug in MEDIA_V else ''
+
+
 def video_media(slug, title, w, h, sound, shaped=False):
     """A self-hosted looping video shown like a plain asset (files in assets/video/).
     shaped=True keeps the video's own shape (carousel); otherwise it fills a standard tile."""
     btn = '<button type="button" class="vid-sound" aria-pressed="false">Sound on</button>' if sound else ''
     style = f' style="aspect-ratio: {w} / {h}"' if shaped else ''
     return (f'<div class="vid"{style}>'
-            f'<video src="/assets/video/{slug}.mp4" poster="/assets/img/{slug}-poster.webp" '
+            f'<video src="/assets/video/{slug}.mp4{mv(slug)}" poster="/assets/img/{slug}-poster.webp{mv(slug)}" '
             f'autoplay muted loop playsinline preload="metadata" aria-label="{title}"></video>'
             f'{btn}</div>')
 
