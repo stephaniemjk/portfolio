@@ -125,7 +125,7 @@ VIDEOS = [
     # has sound (shows the Sound on button), part of the Industrial Beauty Series.
     # Page text, if any, lives in _build/animations/<slug>.html. Page URL: /animations-<slug>
     ('harmless-guests', 'Harmless Guests', 1920, 1080, True, False),
-    ('nested-gloves', 'Nested Gloves in Scaffolding', 1080, 1440, False, False),
+    ('nested-gloves', 'Nested Gloves in Scaffolding', 1080, 1440, False, True),
     ('puppet-karate', 'Puppet Karate', 1080, 1350, False, False),
     ('paint-strokes', 'Performance by the [Paint] Strokes', 1280, 720, False, False),
     ('le-train', 'Le Train', 1600, 1200, True, True),
