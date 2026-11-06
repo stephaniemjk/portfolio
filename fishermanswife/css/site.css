@@ -167,7 +167,8 @@ html { scroll-behavior: smooth; }
 }
 .pot-page .steps { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: clamp(24px, 6vh, 64px); }
 /* translateX offsets the art's off-center canvas so pot and byline sit on the page's center line */
-.pot { width: min(512px, 100%, 62vh); min-width: 0; flex: none; transform: translateX(-6.1%); }
+.pot { width: 512px; max-width: 100%; flex: none; transform: translateX(-6.1%); }
+@media (max-height: 826px) { .pot { width: 62vh; } }
 .pot .pot-media { max-width: 100%; }
 .pot-media { width: 100%; height: auto; aspect-ratio: 1430 / 1218; }
 
